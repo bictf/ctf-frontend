@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1
+  title: api
+servers:
+  - url: "/api"
+paths:
+  /login:
+    get:
+      tags:
+        - login
+      summary: login api
+      operationId: login
+      parameters:
+        - name: username
+          in: query
+          description: the user name
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: the user password
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: blaaaaaaaaaaa
+          content:
+            application/json:
+              type: object
+              required:
+                - success
+                - passwordDiff
+                - userCookie
+              properties:
+                success:
+                  type: Boolean
+                  description: true if the password is valid
+                passwordDiff:
+                  type: array
+                  items: number
+                  description: the diff of the given password from the actual password

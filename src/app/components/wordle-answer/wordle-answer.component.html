@@ -1,0 +1,7 @@
+<div class="wordle-answer">
+    <div *ngFor="let char of data">
+        <div class="wordle-char incorrect-char" *ngIf="char === 0"></div>
+        <div class="wordle-char correct-char-wrong-place" *ngIf="char === 1"></div>
+        <div class="wordle-char correct-char-correct-place" *ngIf="char === 2"></div>
+    </div>
+</div>
