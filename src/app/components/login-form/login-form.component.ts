@@ -32,12 +32,9 @@ export class LoginFormComponent {
   }
 
   showWordle({ success, passwordDiff }: LoginResponseFromServer) {
-    console.log(success);
-    console.log(passwordDiff);
-
-    this.snackBar.openFromComponent(WordleAnswerComponent,
-      {data: passwordDiff}
-    );
+    this.snackBar.openFromComponent(WordleAnswerComponent, {
+      data: passwordDiff,
+    });
   }
 
   loginWithGoogle() {
