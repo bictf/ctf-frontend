@@ -26,14 +26,13 @@ paths:
             type: string
       responses:
         200:
-          description: blaaaaaaaaaaa
+          description: Login response
           content:
             application/json:
               type: object
               required:
                 - success
                 - passwordDiff
-                - userCookie
               properties:
                 success:
                   type: Boolean
@@ -42,3 +41,36 @@ paths:
                   type: array
                   items: number
                   description: the diff of the given password from the actual password
+  /search:
+    get:
+      tags:
+        - search
+      summary: search api
+      operationId: search
+      parameters:
+        - name: text
+          in: query
+          description: The search regex
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: results found
+          content:
+            application/json:
+              type: object
+              required:
+                - totalResults
+                - title
+                - content
+              properties:
+                totalResults:
+                  type: number
+                  description: total results found
+                title:
+                  type: string
+                  description: title of first result
+                content:
+                  type: string
+                  description: content of first result

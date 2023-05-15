@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { LoginService } from './services/login.service';
+import { SearchService } from './services/search.service';
 
 /**
  * Module that provides all services and configuration.
@@ -15,6 +16,7 @@ import { LoginService } from './services/login.service';
   declarations: [],
   providers: [
     LoginService,
+    SearchService,
     ApiConfiguration
   ],
 })

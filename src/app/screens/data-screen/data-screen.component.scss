@@ -1,0 +1,22 @@
+.site-logo {
+  width: 30rem;
+}
+
+.big-data-screen{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen-header {
+  width: max-content;
+  position: relative;
+  top: -3rem;
+  // padding-bottom: 7rem;
+}
+
+.result-page{
+  background-color: aqua;
+  height: 50%;
+}

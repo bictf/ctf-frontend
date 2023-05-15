@@ -1,0 +1,12 @@
+<div class="screen big-data-screen">
+  <div class="screen-header">
+    <img class="site-logo" src="../../../assets/gooloog.png">
+    <app-search-form (searchEvent)="onSearchPressed($event)"></app-search-form>
+  </div>
+
+  <div class="result-page" *ngIf="showResultPage">
+    <p>{{totalResults === 0 ? "לא נמצאו תוצאות" : "תוצאה ראשונה מתוך " + totalResults}}</p>
+    <h3>{{title}}</h3>
+    <p>{{content}}</p>
+  </div>
+</div>

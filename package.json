@@ -4,15 +4,18 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config .\\src\\proxy.conf.json",
-    "api:compile": "npx ng-openapi-gen --input .\\api.yaml --output src/app/modules/openapi",
-    "build": "ng build",
+    "api:compile": "npx ng-openapi-gen --input ./api.yaml --output src/app/modules/openapi",
+    "build": "npm run api:compile && ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "docker:build": "docker build -t biss-ctf-frontend .",
+    "docker:run": "docker run -p 8000:80 -d biss-ctf-frontend"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.0.0",
     "@angular/cdk": "^15.2.8",
+    "@angular/cli": "^15.2.0",
     "@angular/common": "^15.0.0",
     "@angular/compiler": "^15.0.0",
     "@angular/core": "^15.0.0",

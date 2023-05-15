@@ -10,6 +10,8 @@ import { InputFieldComponent } from './components/input-field/input-field.compon
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { WordleAnswerComponent } from './components/wordle-answer/wordle-answer.component';
+import { DataScreenComponent } from './screens/data-screen/data-screen.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { WordleAnswerComponent } from './components/wordle-answer/wordle-answer.
     InputFieldComponent,
     LoginFormComponent,
     WordleAnswerComponent,
+    DataScreenComponent,
+    SearchFormComponent,
   ],
   imports: [
     BrowserModule,
