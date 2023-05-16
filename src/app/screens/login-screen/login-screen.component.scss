@@ -7,40 +7,6 @@
     justify-content: center;
 }
 
-.side-background{
-    position: fixed;
-    height: 100%;
-    width: 50%;
-    display: flex;
-    align-items: center;
-    z-index: -1;
-}
-
-.logo-side-background{
-    background-color: #007E94;
-    left: 0;
-}
-
-.login-side-background{
-    background-color: #E2E3EA;
-    right: 0;
-}
-
-.container{
-    background-color: inherit;
-    height: 80%;
-    width: 90%;
-        
-    border:1em solid rgba(255,255,255,.23);
-    border-radius: 2em;
-    
-    box-shadow: 7px 14px 4px 0 rgba(0,0,0,.25);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .container-login-side, .container-logo-side{
     width: 50%;
     height: 100%;

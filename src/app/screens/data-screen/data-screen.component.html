@@ -1,12 +1,26 @@
 <div class="screen big-data-screen">
-  <div class="screen-header">
-    <img class="site-logo" src="../../../assets/gooloog.png">
-    <app-search-form (searchEvent)="onSearchPressed($event)"></app-search-form>
-  </div>
+  <div class="full-background grey-background" *ngIf="!showResultPage"></div>
+  <div class="side-background left-side-background grey-background" *ngIf="showResultPage"></div>
+  <div class="side-background right-side-background blue-background" *ngIf="showResultPage"></div>
 
-  <div class="result-page" *ngIf="showResultPage">
-    <p>{{totalResults === 0 ? "לא נמצאו תוצאות" : "תוצאה ראשונה מתוך " + totalResults}}</p>
-    <h3>{{title}}</h3>
-    <p>{{content}}</p>
+  <div class="container">
+    <div class="container-search-side">
+      <div class="screen-header">
+        <img class="site-logo" src="../../../assets/gooloog.png">
+        <app-search-form (searchEvent)="onSearchPressed($event)"></app-search-form>
+      </div>
+    </div>
+
+    <div class="container-result-side" *ngIf="showResultPage">
+      <div class="file" *ngIf="totalResults !== 0">
+        <div class="title">{{title}}</div>
+        <div class="seperator"></div>
+        <div class="content">{{content}}</div>
+        <div class="result-count">{{"1 result out of " + totalResults}}</div>
+      </div>
+      <div class="no-results" *ngIf="totalResults === 0">
+        {{"0 results"}}
+      </div>
+    </div>
   </div>
 </div>

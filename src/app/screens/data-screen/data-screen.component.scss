@@ -4,7 +4,7 @@
 
 .big-data-screen{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
@@ -16,7 +16,69 @@
   // padding-bottom: 7rem;
 }
 
-.result-page{
-  background-color: aqua;
-  height: 50%;
+.container-search-side, .container-result-side{
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-results{
+  font-size: 4rem;
+}
+
+.file{
+  background-color: #d7d7d7;
+  height: calc(100% - 5rem);
+  width: calc(100% - 5rem);
+  padding: 1rem;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  .title{
+    font-size: 2rem;
+  }
+
+  .content{
+    height: 100%;
+    white-space:pre-wrap;
+    word-wrap: break-word;
+    overflow-y: auto;
+    font-size: 1rem;
+  }
+
+  .result-count{
+    color: #5e5e5e;
+  }
+
+  .seperator{
+    height: 0.5rem;
+    width: 12rem;
+    border-bottom: 0.1rem solid #979797;
+  }
+
+  /* scroller */
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 }
