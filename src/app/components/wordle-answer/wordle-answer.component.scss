@@ -1,0 +1,23 @@
+.wordle-answer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.wordle-char{
+    aspect-ratio: 1/1;
+    width: 2rem;
+}
+
+.incorrect-char{
+    background-color: red;
+}
+
+.correct-char-wrong-place{
+    background-color: yellow;
+}
+
+.correct-char-correct-place{
+    background-color: green;
+}
