@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from '../../modules/openapi/services';
 import { LoginResponseFromServer } from 'src/app/apiObjects/LoginResponseFromServer';
 import { WordleAnswerComponent } from '../wordle-answer/wordle-answer.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -15,7 +16,8 @@ export class LoginFormComponent {
 
   constructor(
     private loginService: LoginService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   login() {
@@ -32,9 +34,14 @@ export class LoginFormComponent {
   }
 
   showWordle({ success, passwordDiff }: LoginResponseFromServer) {
-    this.snackBar.openFromComponent(WordleAnswerComponent, {
-      data: passwordDiff,
-    });
+    if (success) {
+      this.router.navigate(['/gooloog']);
+    } else {
+      this.snackBar.openFromComponent(WordleAnswerComponent, {
+        data: passwordDiff,
+        duration: 5000
+      });
+    }
   }
 
   loginWithGoogle() {

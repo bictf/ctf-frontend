@@ -17,7 +17,6 @@ export class DataScreenComponent {
   constructor(
     private searchService: SearchService,
     private snackBar: MatSnackBar) {
-
   }
 
   onSearchPressed(searchText: string): void {
