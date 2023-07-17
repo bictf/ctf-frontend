@@ -1,0 +1,31 @@
+<div class="screen big-data-screen">
+  <div class="full-background grey-background" *ngIf="!showResultPage"></div>
+  <div class="side-background left-side-background grey-background" *ngIf="showResultPage"></div>
+  <div class="side-background right-side-background blue-background" *ngIf="showResultPage"></div>
+
+  <div class="container">
+    <div class="container-search-side">
+      <div class="screen-header">
+        <img class="site-logo" src="../../../assets/gooloog.png">
+        <app-search-form (searchEvent)="onSearchPressed($event)"></app-search-form>
+      </div>
+    </div>
+
+    <div class="container-result-side" *ngIf="showResultPage">
+      <div class="file" *ngIf="totalResults !== 0">
+        <div class="title">{{title}}</div>
+        <div class="seperator"></div>
+        <div class="content" *ngIf="!isBinaryFile">{{content}}</div>
+        <div class="admin-file-content" *ngIf="isBinaryFile">
+          <app-access-denied></app-access-denied>
+          <app-start-maze-button></app-start-maze-button>
+        <div class="result-count">{{"1 result out of " + totalResults}}</div>
+      </div>
+      <div class="no-results" *ngIf="totalResults === 0">
+        {{'0 results for "' + searchText + '"'}}
+      </div>
+    </div>
+  </div>
+
+  <app-made-by-lable></app-made-by-lable>
+</div>

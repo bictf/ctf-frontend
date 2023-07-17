@@ -1,0 +1,18 @@
+<div class="login-form">
+    <div class="login-header">
+        Login to your Account
+    </div>
+    <div class="fields-container">
+        <app-input-field (valueChange)="this.username = $event" label="Username"></app-input-field>
+        <app-input-field (valueChange)="this.password = $event" label="Password"></app-input-field>
+    </div>
+    <div class="buttons-container">
+        <button class="login-button" (click)="this.login()">LOGIN</button>
+        <button class="google-login-button" (click)="this.loginWithGoogle()">
+            <img class="google-logo" src="../../../assets/google-logo.png">
+            Continue with Google
+        </button>            
+    </div>
+
+    <app-timer #timer></app-timer>
+</div>

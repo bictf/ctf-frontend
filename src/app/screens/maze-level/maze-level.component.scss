@@ -1,0 +1,87 @@
+.maze-screen{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-question-side, .container-answers-side{
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-answers-side{
+    flex-direction: column;
+}
+
+.question{
+    height: 100%;
+    overflow-y: auto;
+}   
+
+.question > div{
+    direction: rtl;
+    font-size: 2.4rem;
+    line-height: 110%;
+    padding: 1rem;
+    text-align: center;
+}
+
+.password-place{
+
+}
+
+.answers{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    width: 100%;
+    height: 100%;
+}
+
+.answer{
+    background: #b7b7b8;
+    direction: rtl;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    box-shadow: -5px 5px 20px -10px black, 5px -5px 20px -20px black;
+    font-size: 2rem;
+}
+
+.answer:hover{
+    filter: brightness(95%);
+}
+
+.answer:active{
+    filter: brightness(85%);
+    box-shadow: inset -5px 5px 20px -10px black, inset 5px -5px 20px -20px black;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

@@ -1,0 +1,6 @@
+<div class="dialog-background" [ngStyle]="{'display': isOpen ? 'flex' : 'none'}" (click)="onClose.emit()">
+    <div class="dialog" (click)="$event.stopPropagation()">
+        <div class="text">we need you to answer some questions to check you are not an israeli hacker😈</div>
+        <button class="submit-button" (click)="onSubmit.emit()">OK</button>
+    </div>
+</div>

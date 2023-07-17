@@ -1,0 +1,24 @@
+<div class="screen maze-screen">
+    <div class="side-background left-side-background blue-background"></div>
+    <div class="side-background right-side-background grey-background"></div>
+    <div class="container">
+        <div class="container-question-side">
+            <div class="answers">
+                <div class="answer" *ngFor="let answer of answers" (click)="clickAnswer(answer)">{{answer}}</div>
+            </div>
+        </div>
+        <div class="container-answers-side">
+            <div class="question">
+                <div>
+                    {{question}}
+                </div>
+            </div>
+            <div class="password-place">
+                הסיסמא נמצאת ב{{passwordPlace}}
+            </div>
+        </div>
+    </div>
+
+    <app-answer-password-dialog [isOpen]="isDialogOpen" (onSubmit)="submitLevel($event)" (onClose)="isDialogOpen = false"></app-answer-password-dialog>
+    <app-made-by-lable></app-made-by-lable>
+</div>
