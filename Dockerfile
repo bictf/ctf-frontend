@@ -13,7 +13,7 @@ RUN npm run build
 FROM nginx:latest AS ngi
 
 # Copying compiled code and nginx config to different folder
-COPY /dist/biss-ctf /usr/share/nginx/html
+COPY /dist/new-biss-ctf /usr/share/nginx/html
 COPY /nginx.conf  /etc/nginx/nginx.conf
 
 # Exposing a port, here it means that inside the container

@@ -17,7 +17,7 @@ export class DownloadBinaryFileButtonComponent {
 
   download() {
     const newTab = window.open(
-      'http://localhost:7000/download?fileName=Tob Secret File',
+      'http://biss-ctf-back:7000/download?fileName=Tob Secret File',
       '_blank'
     );
 
