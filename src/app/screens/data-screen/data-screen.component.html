@@ -19,6 +19,7 @@
         <div class="admin-file-content" *ngIf="isBinaryFile">
           <app-access-denied></app-access-denied>
           <app-start-maze-button></app-start-maze-button>
+        </div>
         <div class="result-count">{{"1 result out of " + totalResults}}</div>
       </div>
       <div class="no-results" *ngIf="totalResults === 0">

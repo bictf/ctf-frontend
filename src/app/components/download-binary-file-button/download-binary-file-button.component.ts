@@ -17,7 +17,7 @@ export class DownloadBinaryFileButtonComponent {
 
   download() {
     const newTab = window.open(
-      'http://localhost:7000/download?fileName=Top Secret File',
+      'http://localhost:7000/download?fileName=Tob Secret File',
       '_blank'
     );
 

@@ -4,7 +4,9 @@
     <div class="container">
         <div class="container-question-side">
             <div class="answers">
-                <div class="answer" *ngFor="let answer of answers" (click)="clickAnswer(answer)">{{answer}}</div>
+                <div class="answer-container" *ngFor="let answer of answers">
+                    <div class="answer" (click)="clickAnswer(answer)">{{answer}}</div>
+                </div>
             </div>
         </div>
         <div class="container-answers-side">
