@@ -8,8 +8,8 @@
     "build": "npm run api:compile && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "docker:build": "docker build -t biss-ctf-frontend .",
-    "docker:run": "docker run -p 8000:80 -d biss-ctf-frontend"
+    "docker:build": "docker build -t biss-ctf-front:latest .",
+    "docker:run": "docker run -p 8000:80 -d biss-ctf-front:latest"
   },
   "private": true,
   "dependencies": {
