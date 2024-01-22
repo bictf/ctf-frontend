@@ -1,29 +1,26 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { mazeLevel } from '../fn/maze-level/maze-level';
+import { mazeLevel_1 } from '../fn/maze-level/maze-level-1';
+import { MazeLevel_1$Params } from '../fn/maze-level/maze-level-1';
+import { MazeLevel$Params } from '../fn/maze-level/maze-level';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class MazeLevelService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation mazeLevel
-   */
+  /** Path part for operation `mazeLevel()` */
   static readonly MazeLevelPath = '/maze/level';
 
   /**
@@ -36,32 +33,8 @@ export class MazeLevelService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  mazeLevel$Response(params: {
-
-    /**
-     * the level id
-     */
-    id: string;
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<any>> {
-
-    const rb = new RequestBuilder(this.rootUrl, MazeLevelService.MazeLevelPath, 'get');
-    if (params) {
-      rb.query('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<any>;
-      })
-    );
+  mazeLevel$Response(params: MazeLevel$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+    return mazeLevel(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -74,25 +47,13 @@ export class MazeLevelService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  mazeLevel(params: {
-
-    /**
-     * the level id
-     */
-    id: string;
-  },
-  context?: HttpContext
-
-): Observable<any> {
-
-    return this.mazeLevel$Response(params,context).pipe(
-      map((r: StrictHttpResponse<any>) => r.body as any)
+  mazeLevel(params: MazeLevel$Params, context?: HttpContext): Observable<any> {
+    return this.mazeLevel$Response(params, context).pipe(
+      map((r: StrictHttpResponse<any>): any => r.body)
     );
   }
 
-  /**
-   * Path part for operation mazeLevel_1
-   */
+  /** Path part for operation `mazeLevel_1()` */
   static readonly MazeLevel_1Path = '/maze/level';
 
   /**
@@ -105,50 +66,8 @@ export class MazeLevelService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  mazeLevel_1$Response(params: {
-
-    /**
-     * the user uuid
-     */
-    uuid: string;
-
-    /**
-     * the level id
-     */
-    id: string;
-
-    /**
-     * the level password
-     */
-    password: string;
-
-    /**
-     * the level answer
-     */
-    answer: string;
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<any>> {
-
-    const rb = new RequestBuilder(this.rootUrl, MazeLevelService.MazeLevel_1Path, 'post');
-    if (params) {
-      rb.query('uuid', params.uuid, {});
-      rb.query('id', params.id, {});
-      rb.query('password', params.password, {});
-      rb.query('answer', params.answer, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<any>;
-      })
-    );
+  mazeLevel_1$Response(params: MazeLevel_1$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+    return mazeLevel_1(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -161,34 +80,9 @@ export class MazeLevelService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  mazeLevel_1(params: {
-
-    /**
-     * the user uuid
-     */
-    uuid: string;
-
-    /**
-     * the level id
-     */
-    id: string;
-
-    /**
-     * the level password
-     */
-    password: string;
-
-    /**
-     * the level answer
-     */
-    answer: string;
-  },
-  context?: HttpContext
-
-): Observable<any> {
-
-    return this.mazeLevel_1$Response(params,context).pipe(
-      map((r: StrictHttpResponse<any>) => r.body as any)
+  mazeLevel_1(params: MazeLevel_1$Params, context?: HttpContext): Observable<any> {
+    return this.mazeLevel_1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<any>): any => r.body)
     );
   }
 

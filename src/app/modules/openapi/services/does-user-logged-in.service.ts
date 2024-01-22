@@ -1,29 +1,24 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { doesUserLoggedIn } from '../fn/does-user-logged-in/does-user-logged-in';
+import { DoesUserLoggedIn$Params } from '../fn/does-user-logged-in/does-user-logged-in';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class DoesUserLoggedInService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation doesUserLoggedIn
-   */
+  /** Path part for operation `doesUserLoggedIn()` */
   static readonly DoesUserLoggedInPath = '/login/doesUserLoggedIn';
 
   /**
@@ -36,32 +31,8 @@ export class DoesUserLoggedInService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  doesUserLoggedIn$Response(params: {
-
-    /**
-     * the user uuid
-     */
-    uuid: string;
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<any>> {
-
-    const rb = new RequestBuilder(this.rootUrl, DoesUserLoggedInService.DoesUserLoggedInPath, 'get');
-    if (params) {
-      rb.query('uuid', params.uuid, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<any>;
-      })
-    );
+  doesUserLoggedIn$Response(params: DoesUserLoggedIn$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+    return doesUserLoggedIn(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -74,19 +45,9 @@ export class DoesUserLoggedInService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  doesUserLoggedIn(params: {
-
-    /**
-     * the user uuid
-     */
-    uuid: string;
-  },
-  context?: HttpContext
-
-): Observable<any> {
-
-    return this.doesUserLoggedIn$Response(params,context).pipe(
-      map((r: StrictHttpResponse<any>) => r.body as any)
+  doesUserLoggedIn(params: DoesUserLoggedIn$Params, context?: HttpContext): Observable<any> {
+    return this.doesUserLoggedIn$Response(params, context).pipe(
+      map((r: StrictHttpResponse<any>): any => r.body)
     );
   }
 

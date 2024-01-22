@@ -1,29 +1,24 @@
 /* tslint:disable */
 /* eslint-disable */
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
+import { login } from '../fn/login/login';
+import { Login$Params } from '../fn/login/login';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class LoginService extends BaseService {
-  constructor(
-    config: ApiConfiguration,
-    http: HttpClient
-  ) {
+  constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
 
-  /**
-   * Path part for operation login
-   */
+  /** Path part for operation `login()` */
   static readonly LoginPath = '/login';
 
   /**
@@ -36,44 +31,8 @@ export class LoginService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  login$Response(params: {
-
-    /**
-     * the user uuid
-     */
-    uuid: string;
-
-    /**
-     * the user name
-     */
-    username: string;
-
-    /**
-     * the user password
-     */
-    password: string;
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<any>> {
-
-    const rb = new RequestBuilder(this.rootUrl, LoginService.LoginPath, 'get');
-    if (params) {
-      rb.query('uuid', params.uuid, {});
-      rb.query('username', params.username, {});
-      rb.query('password', params.password, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<any>;
-      })
-    );
+  login$Response(params: Login$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+    return login(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -86,29 +45,9 @@ export class LoginService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  login(params: {
-
-    /**
-     * the user uuid
-     */
-    uuid: string;
-
-    /**
-     * the user name
-     */
-    username: string;
-
-    /**
-     * the user password
-     */
-    password: string;
-  },
-  context?: HttpContext
-
-): Observable<any> {
-
-    return this.login$Response(params,context).pipe(
-      map((r: StrictHttpResponse<any>) => r.body as any)
+  login(params: Login$Params, context?: HttpContext): Observable<any> {
+    return this.login$Response(params, context).pipe(
+      map((r: StrictHttpResponse<any>): any => r.body)
     );
   }
 
