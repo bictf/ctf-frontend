@@ -1,4 +1,4 @@
-FROM node:18.10-alpine AS build
+FROM node:21 AS build
 # Create a Virtual directory inside the docker image
 WORKDIR /dist/src/app
 
