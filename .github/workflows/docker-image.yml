@@ -15,9 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ctf-frontend:$(date +%s)
+      run: docker build . --file Dockerfile --tag ctf-frontend:latest
     - name: Save the docker image
-      run: docker save ctf-frontend:$(date +%s) -o frontent.tar
+      run: docker save ctf-frontend:latest -o frontent.tar
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.2.0
       with:
