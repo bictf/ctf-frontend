@@ -2,7 +2,6 @@ FROM node:21 AS build
 # Copy files from local machine to virtual directory in docker image
 COPY . /code
 WORKDIR /code
-RUN npm run api:compile
 RUN npm install
 RUN npm run build
 

@@ -23,7 +23,7 @@ jobs:
       with:
         name: frontent-image
         path: frontent.tar
-        if-no-files-found: fail
+        if-no-files-found: error
         retention-days: 90
               
       
