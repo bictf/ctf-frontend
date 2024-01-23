@@ -1,9 +1,7 @@
 FROM node:21 AS build
-# Create a Virtual directory inside the docker image
-WORKDIR /dist/src/app
-
 # Copy files from local machine to virtual directory in docker image
-COPY . .
+COPY . /code
+WORKDIR /code
 RUN npm run api:compile
 RUN npm install
 RUN npm run build
@@ -13,7 +11,7 @@ RUN npm run build
 FROM nginx:latest AS ngi
 
 # Copying compiled code and nginx config to different folder
-COPY /dist/new-biss-ctf /usr/share/nginx/html
+COPY --from=build /code/dist/new-biss-ctf /usr/share/nginx/html
 COPY /nginx.conf  /etc/nginx/nginx.conf
 
 # Exposing a port, here it means that inside the container
