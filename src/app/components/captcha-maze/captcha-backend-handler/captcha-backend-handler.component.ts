@@ -15,4 +15,14 @@ export class CaptchaBackendHandlerComponent {
     //TODO: get captchas from backend
     //TODO: randomize captcha list
   }
+
+  shuffleCaptchaList(captchaList: Captcha[]) {
+    const listLength = captchaList.length
+    for (let i=0; i < listLength; i++) {
+      let index = Math.floor(Math.random() * (listLength - 1))
+      let temp = captchaList[index]
+      captchaList[index] = captchaList[i]
+      captchaList[i] = temp 
+    }
+  }
 }
