@@ -9,16 +9,16 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   styleUrl: './image-grid-captcha.component.scss'
 })
 export class ImageGridCaptchaComponent {
-  title: string = ""
-  images: string[] = []
+  question: string = ""
+  options: string[] = []
   correctAnswer: boolean[] = []
   currentAnswer: boolean[] = []
 
-  constructor(private dialogRef: MatDialogRef<ImageGridCaptchaComponent>, @Inject(MAT_DIALOG_DATA) public data: {title: string, images: string[], correctAnswer: boolean[]}) {
-    this.title = data.title
-    this.images = data.images
+  constructor(private dialogRef: MatDialogRef<ImageGridCaptchaComponent>, @Inject(MAT_DIALOG_DATA) public data: {question: string, image: any, options: string[], correctAnswer: boolean[]}) {
+    this.question = data.question
+    this.options = data.options
     this.correctAnswer = data.correctAnswer
-    for (let image of this.images){
+    for (let image of this.options){
       this.currentAnswer.push(false)
     }
   }
