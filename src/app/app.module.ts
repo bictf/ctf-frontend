@@ -26,9 +26,9 @@ import { StartMazeButtonComponent } from './components/start-maze-button/start-m
 import { TrashScreenComponent } from './screens/trash-screen/trash-screen.component';
 import { GoToMazeDialogComponent } from './components/go-to-maze-dialog/go-to-maze-dialog.component';
 import { AmericanQuestionComponent } from './components/american-question/american-question.component';
-import { CommanderQuestionComponent } from './screens/commander-question/commander-question.component';
+import { CommanderQuestionComponent } from './components/captcha-maze/commander-question/commander-question.component';
 import { MultipleChoiceAnswerComponent } from './components/multiple-choice-answer/multiple-choice-answer.component';
-import { BabyCommandersQuestionComponent } from './screens/baby-commanders-question/baby-commanders-question.component';
+import { BabyCommandersQuestionComponent } from './components/captcha-maze/baby-commanders-question/baby-commanders-question.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
