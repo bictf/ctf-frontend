@@ -1,0 +1,22 @@
+.answers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns as needed */
+  gap: 40px; /* Adjust the gap between answers */
+  margin: 0 5%;
+}
+
+.question {
+  text-align: center;
+}
+
+.question-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.question{
+  width: 100%;
+  margin-bottom: 10%;
+}

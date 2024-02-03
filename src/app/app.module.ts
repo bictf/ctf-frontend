@@ -25,6 +25,10 @@ import { LootScreenComponent } from './screens/loot-screen/loot-screen.component
 import { StartMazeButtonComponent } from './components/start-maze-button/start-maze-button.component';
 import { TrashScreenComponent } from './screens/trash-screen/trash-screen.component';
 import { GoToMazeDialogComponent } from './components/go-to-maze-dialog/go-to-maze-dialog.component';
+import { AmericanQuestionComponent } from './components/american-question/american-question.component';
+import { CommanderQuestionComponent } from './screens/commander-question/commander-question.component';
+import { MultipleChoiceAnswerComponent } from './components/multiple-choice-answer/multiple-choice-answer.component';
+import { BabyCommandersQuestionComponent } from './screens/baby-commanders-question/baby-commanders-question.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
@@ -63,6 +67,10 @@ const appRoutes: Routes = [
     StartMazeButtonComponent,
     TrashScreenComponent,
     GoToMazeDialogComponent,
+    AmericanQuestionComponent,
+    CommanderQuestionComponent,
+    MultipleChoiceAnswerComponent,
+    BabyCommandersQuestionComponent,
   ],
   imports: [
     BrowserModule,

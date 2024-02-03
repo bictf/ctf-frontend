@@ -1,0 +1,9 @@
+<div class="question-container">
+    <div class="question">
+        <ng-content select=[question]></ng-content>
+    </div>
+
+    <div class="answers">
+        <app-multiple-choice-answer *ngFor="let answer of answers; let i = index;" [answerText]=answer [answerIndex]=i (answerClicked)="handleAnswerClicked($event)"></app-multiple-choice-answer>
+    </div>
+</div>
