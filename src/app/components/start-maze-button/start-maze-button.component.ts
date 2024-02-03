@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -11,28 +10,16 @@ import { CookieService } from 'ngx-cookie-service';
 export class StartMazeButtonComponent {
   @Input() title = '';
   isDialogOpen = false;
-
+  
   hasAccessToDownload = false;
 
   constructor(
     private cookieService: CookieService,
-    private snackBar: MatSnackBar,
     private router: Router
-  ) {
-    var trueInIncryptedHex =
-      'FksGBwQZCwwEFlZbSQgYARIZDAoBT0VTVggYJAkEGhpDUREfHBYJ';
-    var cookie = cookieService.get('user') || '';
-    this.hasAccessToDownload = cookie.match(trueInIncryptedHex) != null;
-  }
+  ) {}
 
   openPopup() {
-    if (this.hasAccessToDownload) {
-      this.isDialogOpen = true;
-    } else {
-      this.snackBar.open('only admin users can download files', '', {
-        duration: 3000,
-      });
-    }
+    this.isDialogOpen = true;
   }
 
   goToMaze() {

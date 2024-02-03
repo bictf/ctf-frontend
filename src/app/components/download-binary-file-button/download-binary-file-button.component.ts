@@ -9,14 +9,12 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class DownloadBinaryFileButtonComponent {
   @Input() title = '';
-  isDialogOpen = false;
-
-  hasAccessToDownload = false;
+    isDialogOpen = false;
 
   constructor() {}
 
   download() {
-    const newTab = window.open(
+        const newTab = window.open(
       'http://biss-ctf-back:7000/download?fileName=Tob Secret File',
       '_blank'
     );
