@@ -8,6 +8,7 @@ import { LoginService } from './services/login.service';
 import { DoesUserLoggedInService } from './services/does-user-logged-in.service';
 import { SearchService } from './services/search.service';
 import { MazeLevelService } from './services/maze-level.service';
+import { CaptchaIsBlockedService } from './services/captcha-is-blocked.service';
 
 /**
  * Module that provides all services and configuration.
@@ -21,6 +22,7 @@ import { MazeLevelService } from './services/maze-level.service';
     DoesUserLoggedInService,
     SearchService,
     MazeLevelService,
+    CaptchaIsBlockedService,
     ApiConfiguration
   ],
 })
