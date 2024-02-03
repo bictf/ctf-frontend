@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
+import { ApiService } from 'src/app/modules/openapi/services';
 
 @Component({
   selector: 'app-download-binary-file-button',
@@ -11,12 +12,13 @@ export class DownloadBinaryFileButtonComponent {
   @Input() title = '';
     isDialogOpen = false;
 
-  constructor(private snackBar: MatSnackBar, private downloadService: DownloadService) {}
+  constructor(private snackBar: MatSnackBar, private apiService: ApiService) {}
 
   download() {
-    this.downloadService
-      .download("Tob Secret File")
+    this.apiService
+      .downloadBinaryFile({fileName: "Tob Secret File"})
       .subscribe(
+        (result) => {},
         (error) =>{
           let errorMessage = ""
           if (error.status == 401){
