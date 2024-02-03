@@ -1,6 +1,9 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {MatDialogConfig, MatDialog} from '@angular/material/dialog';
+import { CaptchaAnswerPopupComponent } from '../captcha-answer-popup/captcha-answer-popup.component';
+import { CaptchaConsts } from '../captcha-consts';
+import { Captcha } from '../captcha';
 
 @Component({
   selector: 'app-captcha-manager',
@@ -10,6 +13,8 @@ import {MatDialogConfig, MatDialog} from '@angular/material/dialog';
   styleUrl: './captcha-manager.component.scss'
 })
 export class CaptchaManagerComponent {
+  @Input() captchaList: Captcha[] = []
+  currentCaptchaIndex = 0
   currentCaptcha?: ComponentType<unknown>
   currentData: {question: string, image: any, options: any, correctAnswer: any} = {question: "", image: null, options: null, correctAnswer: null}
 
@@ -29,17 +34,30 @@ export class CaptchaManagerComponent {
     }
   }
 
+  openAnswerPopup(messageList: string[], buttonTitle: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    let randomMessageIndex = Math.floor(Math.random() * messageList.length)
+    let message = messageList[randomMessageIndex]
+    dialogConfig.data = {message: message, buttonTitle: buttonTitle};
+
+    const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
+  }
+
   handleResult(result: boolean){
     if (result){
-      // TODO: open correct anwser dialog
+      this.openAnswerPopup(CaptchaConsts.CORRECT_ANSWER_MESSAGE, "המשך")
       this.getNextCaptcha()
     } else {
-      // TODO: open incorrect answer dialog
+      this.openAnswerPopup(CaptchaConsts.WRONG_ANSWER_MESSAGES, "נסו שוב")
     }
     this.openCaptcha()
   }
 
   getNextCaptcha() {
-    // TODO: get random captcha
+    this.currentCaptchaIndex += 1
+    let captcha = this.captchaList[this.currentCaptchaIndex]
+    this.currentCaptcha = captcha.captchaComponent
+    this.currentData = captcha.captchaData
   }
 }
