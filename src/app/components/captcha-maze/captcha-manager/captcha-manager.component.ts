@@ -4,6 +4,7 @@ import {MatDialogConfig, MatDialog} from '@angular/material/dialog';
 import { CaptchaAnswerPopupComponent } from '../captcha-answer-popup/captcha-answer-popup.component';
 import { CaptchaConsts } from '../captcha-consts';
 import { Captcha } from '../captcha';
+import { CaptchaIsBlockedService } from 'src/app/modules/openapi/services/captcha-is-blocked.service';
 
 @Component({
   selector: 'app-captcha-manager',
@@ -18,8 +19,10 @@ export class CaptchaManagerComponent {
   currentCaptcha?: ComponentType<unknown>
   currentData: {question: string, image: any, options: any, correctAnswer: any} = {question: "", image: null, options: null, correctAnswer: null}
 
+  canContinue: boolean = true;
 
-  constructor(private dialog: MatDialog) {}
+
+  constructor(private dialog: MatDialog, private isBlockedService: CaptchaIsBlockedService) {}
 
   openCaptcha() {
     if (this.currentCaptcha) {
@@ -55,9 +58,19 @@ export class CaptchaManagerComponent {
   }
 
   getNextCaptcha() {
-    this.currentCaptchaIndex += 1
-    let captcha = this.captchaList[this.currentCaptchaIndex]
-    this.currentCaptcha = captcha.captchaComponent
-    this.currentData = captcha.captchaData
+    this.isBlockedService.captchaIsBlockedGet().subscribe(
+      (isBlocked: boolean) => {
+        this.canContinue = !isBlocked;
+      })
+
+      if (!this.canContinue) {
+        this.currentCaptchaIndex += 1
+        let captcha = this.captchaList[this.currentCaptchaIndex]
+        this.currentCaptcha = captcha.captchaComponent
+        this.currentData = captcha.captchaData
+      } else {
+        //Continue with page
+      }
+    
   }
 }
