@@ -193,3 +193,16 @@ paths:
                 nextLevelId:
                   type: string
                   description: the next level id
+  /captcha/is-blocked:
+    get:
+      tags:
+        - captcha isBlocked
+      summary: Check whether CTF can move on to next level
+      operationID: isBlocked
+      responses:
+        '200':
+          description: Whether CTF can move on to next level
+          content:
+            application/json:
+              schema:
+                type: boolean
