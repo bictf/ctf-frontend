@@ -1,0 +1,24 @@
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
+    text-align: center !important;
+    color: rgb(117, 98, 55) !important;
+} 
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: rgb(227, 222, 181) !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+    direction: rtl !important;
+    background-color: rgba(117, 98, 55, 0.648) !important;
+}
+
+::ng-deep .mat-mdc-button:not(:disabled) {
+    color: white !important;
+    background-color: rgb(117, 98, 55) ;
+    margin: 10px;
+}
+
+::ng-deep .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background, .mdc-checkbox__ripple {
+    background-color: rgb(117, 98, 55) !important;
+    border-color: rgb(117, 98, 55) !important;
+}
