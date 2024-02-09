@@ -21,12 +21,11 @@ import { MadeByLableComponent } from './components/made-by-lable/made-by-lable.c
 import { TimerComponent } from './components/timer/timer.component';
 import { AnswerPasswordDialogComponent } from './components/answer-password-dialog/answer-password-dialog.component';
 import { LootScreenComponent } from './screens/loot-screen/loot-screen.component';
-import { StartMazeButtonComponent } from './components/start-maze-button/start-maze-button.component';
-import { GoToMazeDialogComponent } from './components/go-to-maze-dialog/go-to-maze-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
   { path: 'login', component: LoginScreenComponent },
+  //TODO - add CaptchaScreenComponent
   {
     path: 'maze-level/biss-matzov-genesis-is-the-best',
     component: LootScreenComponent,
@@ -40,9 +39,7 @@ const appRoutes: Routes = [
     AppComponent,
     LoginScreenComponent,
     InputFieldComponent,
-    LoginFormComponent,
     WordleAnswerComponent,
-    DataScreenComponent,
     SearchFormComponent,
     AccessDeniedScreenComponent,
     AccessDeniedComponent,
@@ -51,8 +48,9 @@ const appRoutes: Routes = [
     TimerComponent,
     AnswerPasswordDialogComponent,
     LootScreenComponent,
-    StartMazeButtonComponent,
     GoToMazeDialogComponent,
+    LoginFormComponent,
+    DataScreenComponent,
   ],
   imports: [
     BrowserModule,
