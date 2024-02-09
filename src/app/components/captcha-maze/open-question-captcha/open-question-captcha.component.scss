@@ -1,0 +1,19 @@
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
+    color: rgb(117, 98, 55) !important;
+} 
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    text-align: center !important;
+    background-color: rgb(227, 222, 181) !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+    direction: rtl !important;
+    background-color: rgba(117, 98, 55, 0.648) !important;
+}
+
+::ng-deep .mat-mdc-button:not(:disabled) {
+    color: white !important;
+    background-color: rgb(117, 98, 55) ;
+    margin: 10px;
+}

@@ -28,6 +28,8 @@ export class CaptchaManagerComponent {
       dialogConfig.data = this.currentData;
 
       const dialogRef = this.dialog.open(this.currentCaptcha, dialogConfig);
+      dialogRef.disableClose = true;
+
       dialogRef.afterClosed().subscribe(
           result => this.handleResult(result)
       );    
@@ -42,6 +44,7 @@ export class CaptchaManagerComponent {
     dialogConfig.data = {message: message, buttonTitle: buttonTitle};
 
     const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
+    dialogRef.disableClose = true;
   }
 
   handleResult(result: boolean){
