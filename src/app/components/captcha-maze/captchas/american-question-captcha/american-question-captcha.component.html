@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{question}}</h2>
+<mat-dialog-content>
+    <img *ngIf="image" src="image">
+    <div *ngFor="let answer of options; let i = index;">
+        <mat-checkbox color='warn' [checked]="currentAnswer === i" (change)="currentAnswer = i">{{answer}}</mat-checkbox>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="checkAnswer()">Submit</button>
+</mat-dialog-actions>
