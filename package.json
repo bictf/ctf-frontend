@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --proxy-config .\\src\\proxy.conf.json",
-    "api:compile": "npx ng-openapi-gen --input ./api.yaml --output src/app/modules/openapi",
+    "api:compile": "npx ng-openapi-gen --input ./backend-api.yaml --ignore-unused-models false --output src/app/modules/openapi",
     "build": "npm run api:compile && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

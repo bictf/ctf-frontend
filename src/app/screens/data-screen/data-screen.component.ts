@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
   DoesUserLoggedInService,
   SearchService,
-} from 'src/app/modules/openapi/services';
+} from '../../modules/openapi/services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SearchResponseFromServer } from 'src/app/objects/api/SearchResponseFromServer';
 import { CookieService } from 'ngx-cookie-service';

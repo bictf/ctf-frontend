@@ -1,215 +1,239 @@
-openapi: "3.0.3"
+openapi: 3.0.3
 info:
-  title: "backend API"
-  description: "backend API"
-  version: "1.0.0"
+  title: backend API
+  description: backend API
+  version: 1.0.0
 servers:
-  - url: "http://localhost:8080"
+  - url: http://localhost:8080
 paths:
   /login:
     get:
-      summary: "GET login"
-      operationId: "login"
+      tags:
+        - login
+      summary: GET login
+      operationId: login
       parameters:
-        - name: "username"
-          in: "query"
+        - name: username
+          in: query
           required: true
           schema:
-            type: "string"
-        - name: "password"
-          in: "query"
+            type: string
+        - name: password
+          in: query
           required: true
           schema:
-            type: "string"
-        - name: "uuid"
-          in: "query"
+            type: string
+        - name: uuid
+          in: query
           required: true
           schema:
-            type: "string"
+            type: string
       responses:
-        "200":
-          description: "OK"
+        200:
+          description: OK
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/LoginResponseToUser"
+                $ref: #/components/schemas/LoginResponseToUser
   /login/doesUserLoggedIn:
     get:
-      summary: "GET login/doesUserLoggedIn"
-      operationId: "doesUserLoggedIn"
+      tags: 
+        - does user logged in
+      summary: GET login/doesUserLoggedIn
+      operationId: doesUserLoggedIn
       parameters:
-        - name: "uuid"
-          in: "query"
+        - name: uuid
+          in: query
           required: true
           schema:
-            type: "string"
+            type: string
       responses:
-        "200":
-          description: "OK"
+        200:
+          description: OK
           content:
             '*/*':
               schema:
-                type: "boolean"
+                type: boolean
   /download:
     get:
-      summary: "GET download"
-      operationId: "downloadBinaryFile"
+      tags:
+        - download
+      summary: GET download
+      operationId: downloadBinaryFile
       parameters:
-        - name: "fileName"
-          in: "query"
+        - name: fileName
+          in: query
           required: true
           schema:
-            type: "string"
-        - name: "user"
-          in: "cookie"
+            type: string
+        - name: user
+          in: cookie
           required: true
           schema:
-            type: "string"
+            type: string
       responses:
-        "200":
-          description: "OK"
+        200:
+          description: OK
           content:
             '*/*':
               schema:
-                type: "array"
+                type: array
                 items:
-                  type: "string"
-                  format: "byte"
+                  type: string
+                  format: byte
   /captcha/cG9zdCBoZXJlIHRvIGZsaXAgd2hldGhlciB0aGUgY2FwdGNoYSBzaG91bGQgcGFzcyBvciBub3Q:
     post:
-      summary: "POST captcha/cG9zdCBoZXJlIHRvIGZsaXAgd2hldGhlciB0aGUgY2FwdGNoYSBzaG91bGQgcGFzcyBvciBub3Q"
-      operationId: "flipCaptcha"
+      tags:
+        - flip captcha
+      summary: POST captcha/cG9zdCBoZXJlIHRvIGZsaXAgd2hldGhlciB0aGUgY2FwdGNoYSBzaG91bGQgcGFzcyBvciBub3Q
+      operationId: flipCaptcha
       responses:
-        "200":
-          description: "OK"
+        200:
+          description: OK
           content:
             '*/*':
               schema:
-                type: "boolean"
+                type: boolean
   /captcha/is-blocked:
     get:
-      summary: "GET captcha/is-blocked"
-      operationId: "canSkipCaptcha"
+      tags:
+        - can skip captcha
+      summary: GET captcha/is-blocked
+      operationId: canSkipCaptcha
       responses:
-        "200":
-          description: "OK"
+        200:
+          description: OK
           content:
             '*/*':
               schema:
-                type: "boolean"
+                type: boolean
   /captcha/questions:
     get:
-      summary: "GET captcha/questions"
-      operationId: "getAllCaptchaQuestions"
+      tags:
+        - captcha questions
+      summary: GET captcha/questions
+      operationId: getAllCaptchaQuestions
       responses:
-        "200":
-          description: "OK"
+        200:
+          description: OK
           content:
             '*/*':
               schema:
-                type: "array"
+                type: array
                 items:
-                  $ref: "#/components/schemas/QuestionData"
+                  $ref: #/components/schemas/QuestionData
   /captcha/pictures:
     get:
-      summary: "GET captcha/pictures"
-      operationId: "getSomePictures"
+      tags:
+        - captcha pictures
+      summary: GET captcha/pictures
+      operationId: getSomePictures
       parameters:
-        - name: "amount"
-          in: "query"
+        - name: amount
+          in: query
           required: true
           schema:
-            type: "integer"
-            format: "int32"
+            type: integer
+            format: int32
       responses:
-        "200":
-          description: "OK"
+        200:
+          description: OK
           content:
             '*/*':
               schema:
-                type: "array"
+                type: array
                 items:
-                  type: "string"
+                  type: string
   /captcha/pictures/by_name:
     get:
-      summary: "GET captcha/pictures/by_name"
-      operationId: "getPicture"
+      tags:
+        - captcha pictures by name
+      summary: GET captcha/pictures/by_name
+      operationId: getPicture
       parameters:
-        - name: "name"
-          in: "query"
+        - name: name
+          in: query
           required: true
           schema:
-            type: "string"
+            type: string
       responses:
-        "200":
-          description: "OK"
+        200:
+          description: OK
           content:
             '*/*':
               schema:
-                type: "array"
+                type: array
                 items:
-                  type: "string"
-                  format: "byte"
+                  type: string
+                  format: byte
   /search:
     get:
-      summary: "GET search"
-      operationId: "login"
+      tags: 
+        - search
+      summary: GET search
+      operationId: search
       parameters:
-        - name: "text"
-          in: "query"
+        - name: text
+          in: query
           required: true
           schema:
-            type: "string"
+            type: string
       responses:
-        "200":
-          description: "OK"
+        200:
+          description: OK
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/SearchResponseToUser"
+                $ref: #/components/schemas/SearchResponseToUser
 components:
   schemas:
     LoginResponseToUser:
-      type: "object"
+      tags:
+        - login response to user
+      type: object
       properties:
         success:
-          type: "boolean"
+          type: boolean
         passwordDiff:
-          type: "integer"
-          format: "int32"
+          type: integer
+          format: int32
         cookie:
-          type: "string"
+          type: string
         time:
-          type: "integer"
-          format: "int64"
+          type: integer
+          format: int64
       required:
-        - "passwordDiff"
-        - "cookie"
+        - passwordDiff
+        - cookie
     QuestionData:
-      type: "object"
+      tags:
+        - question data
+      type: object
       properties:
         title:
-          type: "string"
+          type: string
         answers:
-          type: "array"
+          type: array
           items:
-            type: "string"
+            type: string
         correctAnswer:
-          type: "integer"
-          format: "int32"
+          type: integer
+          format: int32
       required:
-        - "title"
-        - "answers"
+        - title
+        - answers
     SearchResponseToUser:
-      type: "object"
+      tags:
+        - search response to user
+      type: object
       properties:
         totalResults:
-          type: "integer"
-          format: "int64"
+          type: integer
+          format: int64
         title:
-          type: "string"
+          type: string
         content:
-          type: "string"
+          type: string
       required:
-        - "title"
-        - "content"
+        - title
+        - content

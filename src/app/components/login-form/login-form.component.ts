@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoginService } from '../../modules/openapi/services';
+import { LoginService } from '../../modules/openapi/services'
 import { LoginResponseFromServer } from 'src/app/objects/api/LoginResponseFromServer';
 import { WordleAnswerComponent } from '../wordle-answer/wordle-answer.component';
 import { Router } from '@angular/router';

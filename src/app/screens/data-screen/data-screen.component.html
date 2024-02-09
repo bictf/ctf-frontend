@@ -18,7 +18,7 @@
         <div class="content" *ngIf="!isBinaryFile">{{content}}</div>
         <div class="admin-file-content" *ngIf="isBinaryFile">
           <app-access-denied></app-access-denied>
-          <app-start-maze-button></app-start-maze-button>
+          <!--TODO - start captchas here-->
         </div>
         <div class="result-count">{{"1 result out of " + totalResults}}</div>
       </div>
