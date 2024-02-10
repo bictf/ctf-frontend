@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import {MatDialogModule, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-captcha-answer-popup',
@@ -9,6 +9,11 @@ import { MatDialogModule } from '@angular/material/dialog';
   styleUrl: './captcha-answer-popup.component.scss'
 })
 export class CaptchaAnswerPopupComponent {
-  message = "hi";
-  buttonTitle = "Button";
+  message = ""
+  buttonTitle = ""
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {message: string, buttonTitle: string}) {
+    this.message = data.message
+    this.buttonTitle = data.buttonTitle
+  }
 }
