@@ -23,12 +23,13 @@ export class CaptchaManagerComponent {
     if (this.currentCaptcha?.captchaComponent) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.autoFocus = true;
-
-      if (this.currentCaptcha.captchaData) {
+      if (this.currentCaptcha?.captchaData) {
         dialogConfig.data = this.currentCaptcha.captchaData;
       }
 
       const dialogRef = this.dialog.open(this.currentCaptcha.captchaComponent, dialogConfig);
+      dialogRef.disableClose = true;
+
       dialogRef.afterClosed().subscribe(
           result => this.handleResult(result)
       );    
@@ -43,6 +44,7 @@ export class CaptchaManagerComponent {
     dialogConfig.data = {message: message, buttonTitle: buttonTitle};
 
     const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
+    dialogRef.disableClose = true;
   }
 
   handleResult(result: boolean){
