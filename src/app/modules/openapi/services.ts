@@ -1,4 +1,5 @@
-export { ApiService } from './services/api.service';
+export { LoginService } from './services/login.service';
+export { DoesUserLoggedInService } from './services/does-user-logged-in.service';
 export { DownloadService } from './services/download.service';
 export { FlipCaptchaService } from './services/flip-captcha.service';
 export { CanSkipCaptchaService } from './services/can-skip-captcha.service';

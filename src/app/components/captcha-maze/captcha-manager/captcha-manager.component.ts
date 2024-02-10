@@ -3,7 +3,7 @@ import {MatDialogConfig, MatDialog} from '@angular/material/dialog';
 import { CaptchaAnswerPopupComponent } from '../captcha-answer-popup/captcha-answer-popup.component';
 import { CaptchaConsts } from '../captcha-consts';
 import { Captcha } from '../captcha';
-import { CanSkipCaptchaService } from 'src/app/modules/openapi/services';
+import { CanSkipCaptchaService } from "../../../modules/openapi/services/can-skip-captcha.service";
 
 @Component({
   selector: 'app-captcha-manager',
@@ -32,7 +32,7 @@ export class CaptchaManagerComponent {
 
       dialogRef.afterClosed().subscribe(
           result => this.handleResult(result)
-      );    
+      );
     }
   }
 

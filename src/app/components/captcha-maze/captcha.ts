@@ -1,12 +1,12 @@
 import { ComponentType } from "@angular/cdk/overlay"
-import { QuestionData } from "src/app/modules/openapi/models";
+import { ChoiceQuestionData } from "src/app/modules/openapi/models";
 import { CaptchaData } from "./captchaData";
 
 export class Captcha {
     public captchaData?: CaptchaData;
     public captchaComponent?: ComponentType<unknown>;
 
-    constructor(captchaData?: CaptchaData, questionData?: QuestionData, captchaImage?: String, captchaComponent?: ComponentType<unknown>) {
+    constructor(captchaData?: CaptchaData, questionData?: ChoiceQuestionData, captchaImage?: String, captchaComponent?: ComponentType<unknown>) {
         if (captchaData !== undefined) {
             this.captchaData = captchaData;
         } else if (questionData !== undefined) {
@@ -22,7 +22,7 @@ export class Captcha {
 
             this.captchaData.image = captchaImage;
         }
-        
+
         this.captchaComponent = captchaComponent;
     }
 }

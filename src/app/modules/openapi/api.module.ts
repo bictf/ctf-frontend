@@ -4,7 +4,8 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { ApiService } from './services/api.service';
+import { LoginService } from './services/login.service';
+import { DoesUserLoggedInService } from './services/does-user-logged-in.service';
 import { DownloadService } from './services/download.service';
 import { FlipCaptchaService } from './services/flip-captcha.service';
 import { CanSkipCaptchaService } from './services/can-skip-captcha.service';
@@ -21,7 +22,8 @@ import { SearchService } from './services/search.service';
   exports: [],
   declarations: [],
   providers: [
-    ApiService,
+    LoginService,
+    DoesUserLoggedInService,
     DownloadService,
     FlipCaptchaService,
     CanSkipCaptchaService,
