@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
-import { ApiService } from 'src/app/modules/openapi/services';
+import {ApiService} from "../../modules/openapi/services/api.service";
 
 @Component({
   selector: 'app-download-binary-file-button',

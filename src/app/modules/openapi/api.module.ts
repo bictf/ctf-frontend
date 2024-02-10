@@ -4,10 +4,8 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { LoginService } from './services/login.service';
-import { DoesUserLoggedInService } from './services/does-user-logged-in.service';
+import { ApiService } from './services/api.service';
 import { SearchService } from './services/search.service';
-import { MazeLevelService } from './services/maze-level.service';
 
 /**
  * Module that provides all services and configuration.
@@ -17,10 +15,8 @@ import { MazeLevelService } from './services/maze-level.service';
   exports: [],
   declarations: [],
   providers: [
-    LoginService,
-    DoesUserLoggedInService,
+    ApiService,
     SearchService,
-    MazeLevelService,
     ApiConfiguration
   ],
 })

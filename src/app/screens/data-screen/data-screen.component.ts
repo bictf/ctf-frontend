@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  DoesUserLoggedInService,
-  SearchService,
+  ApiService, SearchService,
 } from 'src/app/modules/openapi/services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SearchResponseFromServer } from 'src/app/objects/api/SearchResponseFromServer';
@@ -25,7 +24,7 @@ export class DataScreenComponent {
 
   constructor(
     private searchService: SearchService,
-    private doesUserLoggedInService: DoesUserLoggedInService,
+    private doesUserLoggedInService: ApiService,
     private cookieService: CookieService,
     private router: Router,
     private snackBar: MatSnackBar
@@ -43,7 +42,7 @@ export class DataScreenComponent {
   onSearchPressed(searchText: string): void {
     this.searchText = searchText;
     this.searchService.search({ text: searchText }).subscribe(
-      (result) => this.showSearchResult(result),
+      (result) => this.showSearchResult(<SearchResponseFromServer>result),
       (error) =>
         this.snackBar.open(error.error, '', {
           duration: 3000,
@@ -56,13 +55,13 @@ export class DataScreenComponent {
     totalResults,
     title,
     content,
-    binaryFile,
+    isBinaryFile,
   }: SearchResponseFromServer): void {
     this.showResultPage = true;
 
     this.totalResults = totalResults;
     this.title = title;
     this.content = content;
-    this.isBinaryFile = binaryFile;
+    this.isBinaryFile = isBinaryFile;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoginService } from '../../modules/openapi/services';
+import {ApiService} from '../../modules/openapi/services';
 import { LoginResponseFromServer } from 'src/app/objects/api/LoginResponseFromServer';
 import { WordleAnswerComponent } from '../wordle-answer/wordle-answer.component';
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class LoginFormComponent {
 
   constructor(
     private cookieService: CookieService,
-    private loginService: LoginService,
+    private loginService: ApiService,
     private snackBar: MatSnackBar,
     private router: Router,
     private http: HttpClient

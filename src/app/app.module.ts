@@ -19,26 +19,18 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 import { DownloadBinaryFileButtonComponent } from './components/download-binary-file-button/download-binary-file-button.component';
 import { MadeByLableComponent } from './components/made-by-lable/made-by-lable.component';
 import { TimerComponent } from './components/timer/timer.component';
-import { MazeLevelComponent } from './screens/maze-level/maze-level.component';
 import { AnswerPasswordDialogComponent } from './components/answer-password-dialog/answer-password-dialog.component';
 import { LootScreenComponent } from './screens/loot-screen/loot-screen.component';
 import { StartMazeButtonComponent } from './components/start-maze-button/start-maze-button.component';
-import { TrashScreenComponent } from './screens/trash-screen/trash-screen.component';
 import { GoToMazeDialogComponent } from './components/go-to-maze-dialog/go-to-maze-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
   { path: 'login', component: LoginScreenComponent },
-  { path: 'maze-level', component: MazeLevelComponent },
   {
     path: 'maze-level/biss-matzov-genesis-is-the-best',
     component: LootScreenComponent,
   },
-  {
-    path: 'maze-level/dead-end',
-    component: TrashScreenComponent,
-  },
-  { path: 'maze-level/:levelId', component: MazeLevelComponent },
   { path: 'access-denied', component: AccessDeniedScreenComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
@@ -57,11 +49,9 @@ const appRoutes: Routes = [
     DownloadBinaryFileButtonComponent,
     MadeByLableComponent,
     TimerComponent,
-    MazeLevelComponent,
     AnswerPasswordDialogComponent,
     LootScreenComponent,
     StartMazeButtonComponent,
-    TrashScreenComponent,
     GoToMazeDialogComponent,
   ],
   imports: [
