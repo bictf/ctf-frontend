@@ -22,6 +22,8 @@ import { TimerComponent } from './components/timer/timer.component';
 import { AnswerPasswordDialogComponent } from './components/answer-password-dialog/answer-password-dialog.component';
 import { LootScreenComponent } from './screens/loot-screen/loot-screen.component';
 import { TrashScreenComponent } from './screens/trash-screen/trash-screen.component';
+import { CaptchaManagerComponent } from './components/captcha-maze/captcha-manager/captcha-manager.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
@@ -57,6 +59,7 @@ const appRoutes: Routes = [
     TrashScreenComponent, 
     LoginFormComponent,
     DataScreenComponent,
+    CaptchaManagerComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatTabsModule,
     RouterModule.forRoot(appRoutes),
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

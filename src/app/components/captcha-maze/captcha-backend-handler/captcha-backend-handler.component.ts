@@ -1,19 +1,26 @@
 import { Component } from '@angular/core';
 import { Captcha } from '../captcha';
+import { QuestionData } from "src/app/modules/openapi/models";
+import { CaptchaQuestionsService } from 'src/app/modules/openapi/services';
 
 @Component({
   selector: 'app-captcha-backend-handler',
-  standalone: true,
-  imports: [],
   templateUrl: './captcha-backend-handler.component.html',
-  styleUrl: './captcha-backend-handler.component.scss'
 })
 export class CaptchaBackendHandlerComponent {
   captchaList: Captcha[] = []
 
-  constructor() {
-    //TODO: get captchas from backend
-    //TODO: randomize captcha list
+  constructor(captchaQuestionsService: CaptchaQuestionsService) {
+    let questionDataList: QuestionData[] = [];
+    captchaQuestionsService.getAllCaptchaQuestions().subscribe((receivedData: Array<any>) => {
+      questionDataList = receivedData;
+    });
+
+    questionDataList.forEach((questionData, index) => {
+      this.captchaList[index] = new Captcha(undefined, questionData, undefined, undefined);
+    })
+    
+    this.captchaList = this.shuffleCaptchaList(this.captchaList);
   }
 
   shuffleCaptchaList(captchaList: Captcha[]) {
@@ -24,5 +31,7 @@ export class CaptchaBackendHandlerComponent {
       captchaList[index] = captchaList[i]
       captchaList[i] = temp 
     }
+
+    return captchaList;
   }
 }
