@@ -21,6 +21,8 @@ import { MadeByLableComponent } from './components/made-by-lable/made-by-lable.c
 import { TimerComponent } from './components/timer/timer.component';
 import { AnswerPasswordDialogComponent } from './components/answer-password-dialog/answer-password-dialog.component';
 import { LootScreenComponent } from './screens/loot-screen/loot-screen.component';
+import { CaptchaManagerComponent } from './components/captcha-maze/captcha-manager/captcha-manager.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
@@ -48,9 +50,9 @@ const appRoutes: Routes = [
     TimerComponent,
     AnswerPasswordDialogComponent,
     LootScreenComponent,
-    GoToMazeDialogComponent,
     LoginFormComponent,
     DataScreenComponent,
+    CaptchaManagerComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatTabsModule,
     RouterModule.forRoot(appRoutes),
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,36 +1,34 @@
-import { ComponentType } from '@angular/cdk/portal';
 import { Component, Input } from '@angular/core';
 import {MatDialogConfig, MatDialog} from '@angular/material/dialog';
 import { CaptchaAnswerPopupComponent } from '../captcha-answer-popup/captcha-answer-popup.component';
 import { CaptchaConsts } from '../captcha-consts';
 import { Captcha } from '../captcha';
-import { CaptchaIsBlockedService } from 'src/app/modules/openapi/services/captcha-is-blocked.service';
+import { CanSkipCaptchaService } from 'src/app/modules/openapi/services';
 
 @Component({
   selector: 'app-captcha-manager',
-  standalone: true,
-  imports: [],
   templateUrl: './captcha-manager.component.html',
   styleUrl: './captcha-manager.component.scss'
 })
 export class CaptchaManagerComponent {
-  @Input() captchaList: Captcha[] = []
-  currentCaptchaIndex = 0
-  currentCaptcha?: ComponentType<unknown>
-  currentData: {question: string, image: any, options: any, correctAnswer: any} = {question: "", image: null, options: null, correctAnswer: null}
-
-  canContinue: boolean = true;
+  @Input() captchaList: Captcha[] = [];
+  currentCaptchaIndex = 0;
+  currentCaptcha?: Captcha;
+  canContinue: boolean = false;
 
 
-  constructor(private dialog: MatDialog, private isBlockedService: CaptchaIsBlockedService) {}
+  constructor(private dialog: MatDialog, private canContinueService: CanSkipCaptchaService) {}
 
   openCaptcha() {
-    if (this.currentCaptcha) {
+    if (this.currentCaptcha?.captchaComponent) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.autoFocus = true;
-      dialogConfig.data = this.currentData;
 
-      const dialogRef = this.dialog.open(this.currentCaptcha, dialogConfig);
+      if (this.currentCaptcha.captchaData) {
+        dialogConfig.data = this.currentCaptcha.captchaData;
+      }
+
+      const dialogRef = this.dialog.open(this.currentCaptcha.captchaComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(
           result => this.handleResult(result)
       );    
@@ -58,19 +56,15 @@ export class CaptchaManagerComponent {
   }
 
   getNextCaptcha() {
-    this.isBlockedService.captchaIsBlockedGet().subscribe(
-      (isBlocked: boolean) => {
-        this.canContinue = !isBlocked;
+    this.canContinueService.canSkipCaptcha().subscribe(
+      (canContinue: boolean) => {
+        this.canContinue = canContinue;
       })
 
       if (!this.canContinue) {
-        this.currentCaptchaIndex += 1
-        let captcha = this.captchaList[this.currentCaptchaIndex]
-        this.currentCaptcha = captcha.captchaComponent
-        this.currentData = captcha.captchaData
+        this.currentCaptcha = this.captchaList[this.currentCaptchaIndex++]
       } else {
-        //Continue with page
+        //Continue with CTF
       }
-    
   }
 }

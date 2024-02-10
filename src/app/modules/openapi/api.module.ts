@@ -5,6 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { ApiService } from './services/api.service';
+import { DownloadService } from './services/download.service';
+import { FlipCaptchaService } from './services/flip-captcha.service';
+import { CanSkipCaptchaService } from './services/can-skip-captcha.service';
+import { CaptchaQuestionsService } from './services/captcha-questions.service';
+import { CaptchaPicturesService } from './services/captcha-pictures.service';
+import { CaptchaPicturesByNameService } from './services/captcha-pictures-by-name.service';
 import { SearchService } from './services/search.service';
 
 /**
@@ -16,6 +22,12 @@ import { SearchService } from './services/search.service';
   declarations: [],
   providers: [
     ApiService,
+    DownloadService,
+    FlipCaptchaService,
+    CanSkipCaptchaService,
+    CaptchaQuestionsService,
+    CaptchaPicturesService,
+    CaptchaPicturesByNameService,
     SearchService,
     ApiConfiguration
   ],
@@ -33,7 +45,7 @@ export class ApiModule {
     }
   }
 
-  constructor( 
+  constructor(
     @Optional() @SkipSelf() parentModule: ApiModule,
     @Optional() http: HttpClient
   ) {
