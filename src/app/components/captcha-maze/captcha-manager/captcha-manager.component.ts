@@ -15,6 +15,7 @@ export class CaptchaManagerComponent {
   currentCaptchaIndex = 0;
   currentCaptcha?: Captcha;
   canContinue: boolean = false;
+  currentSleep = 5;
 
 
   constructor(private dialog: MatDialog, private canContinueService: CanSkipCaptchaService) {}
@@ -36,23 +37,35 @@ export class CaptchaManagerComponent {
     }
   }
 
-  openAnswerPopup(messageList: string[], buttonTitle: string) {
+  openCorrectAnswerPopup() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    let randomMessageIndex = Math.floor(Math.random() * messageList.length)
-    let message = messageList[randomMessageIndex]
-    dialogConfig.data = {message: message, buttonTitle: buttonTitle};
+    let randomMessageIndex = Math.floor(Math.random() * CaptchaConsts.CORRECT_ANSWER_MESSAGE.length)
+    let message = CaptchaConsts.CORRECT_ANSWER_MESSAGE[randomMessageIndex]
+    dialogConfig.data = {message: message, buttonTitle: "המשך", time: 0};
 
+    const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
+    dialogRef.disableClose = true;
+  }
+
+  openWrongAnswerPopup() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    let randomMessageIndex = Math.floor(Math.random() * CaptchaConsts.WRONG_ANSWER_MESSAGES.length)
+    let message = CaptchaConsts.WRONG_ANSWER_MESSAGES[randomMessageIndex]
+    dialogConfig.data = {message: message, buttonTitle: "נסו שוב", time: this.currentSleep};
+
+    this.currentSleep += 10;
     const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
     dialogRef.disableClose = true;
   }
 
   handleResult(result: boolean){
     if (result){
-      this.openAnswerPopup(CaptchaConsts.CORRECT_ANSWER_MESSAGE, "המשך")
+      this.openCorrectAnswerPopup()
       this.getNextCaptcha()
     } else {
-      this.openAnswerPopup(CaptchaConsts.WRONG_ANSWER_MESSAGES, "נסו שוב")
+      this.openWrongAnswerPopup()
     }
     this.openCaptcha()
   }

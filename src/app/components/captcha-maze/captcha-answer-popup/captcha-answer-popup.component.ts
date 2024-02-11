@@ -14,9 +14,22 @@ import { MatInputModule } from '@angular/material/input';
 export class CaptchaAnswerPopupComponent {
   message = ""
   buttonTitle = ""
+  time = 0
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {message: string, buttonTitle: string}) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {message: string, buttonTitle: string, time: number}) {
     this.message = data.message
     this.buttonTitle = data.buttonTitle
+    this.time = data.time
+    this.timer()
+  }
+
+  timer() {
+    const timer = setInterval(() => {
+      if (this.time <= 0) {
+        clearInterval(timer);
+      } else {
+        this.time--;
+      }
+    }, 1000);
   }
 }
