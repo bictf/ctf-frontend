@@ -7,6 +7,7 @@ import { GetAllChoiceCaptchaQuestions$Params } from 'src/app/modules/openapi/fn/
 import { CaptchaQuestionsService } from 'src/app/modules/openapi/services/captcha-questions.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AmericanQuestionCaptchaComponent } from '../captchas/american-question-captcha/american-question-captcha.component';
+import { ImageGridCaptchaComponent } from '../captchas/image-grid-captcha/image-grid-captcha.component';
 
 @Component({
   selector: 'app-captcha-backend-handler',
@@ -60,6 +61,14 @@ export class CaptchaBackendHandlerComponent {
   }
 
   getImageGridCaptchas(){
+    this.captchaPictureService.getSomePictures().subscribe(
+      (result) => {
+        for (let i = 0; i < result.length - 9 ; i++) {
+          let captchaData = {question: "סמנו את התמונות בהם מופיעים מפקדי הצבא הציוני", image: null, options: [result[i], result[i+1], result[i+2], result[i+3], result[i+4], result[i+5], result[6], result[i+7], result[i+8]], correctAnswer: null}
+          this.captchaList.push(new Captcha(captchaData, ImageGridCaptchaComponent))
+        }
+      }
+    )
     // TODO: get image grid captchas
   }
 }
