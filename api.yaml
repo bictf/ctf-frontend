@@ -57,19 +57,12 @@ paths:
   /captcha/pictures:
     get:
       summary: "GET captcha/pictures"
-      operationId: "getSomePictures"
-      parameters:
-        - name: "amount"
-          in: "query"
-          required: true
-          schema:
-            type: "integer"
-            format: "int32"
+      operationId: "getAllPictures"
       responses:
         "200":
           description: "OK"
           content:
-            'application/json':
+            '*/*':
               schema:
                 type: "array"
                 items:
