@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  DoesUserLoggedInService,
-  SearchService,
-} from '../../modules/openapi/services';
+import { DoesUserLoggedInService, SearchService,} from 'src/app/modules/openapi/services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SearchResponseFromServer } from 'src/app/objects/api/SearchResponseFromServer';
 import { CookieService } from 'ngx-cookie-service';
@@ -30,7 +27,7 @@ export class DataScreenComponent {
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    doesUserLoggedInService.doesUserLoggedIn({ uuid: getUuid() }).subscribe(
+    doesUserLoggedInService.doesUserLoggedIn({uuid: getUuid()}).subscribe(
       (result) => (result ? null : this.router.navigate(['/access-denied'])),
       (error) =>
         this.snackBar.open(error.error, '', {
@@ -42,8 +39,8 @@ export class DataScreenComponent {
 
   onSearchPressed(searchText: string): void {
     this.searchText = searchText;
-    this.searchService.search({ text: searchText }).subscribe(
-      (result) => this.showSearchResult(result),
+    this.searchService.search({text: searchText}).subscribe(
+      (result) => this.showSearchResult(<SearchResponseFromServer>result),
       (error) =>
         this.snackBar.open(error.error, '', {
           duration: 3000,
@@ -53,16 +50,16 @@ export class DataScreenComponent {
   }
 
   showSearchResult({
-    totalResults,
-    title,
-    content,
-    binaryFile,
-  }: SearchResponseFromServer): void {
+                     totalResults,
+                     title,
+                     content,
+                     isBinaryFile,
+                   }: SearchResponseFromServer): void {
     this.showResultPage = true;
 
     this.totalResults = totalResults;
     this.title = title;
     this.content = content;
-    this.isBinaryFile = binaryFile;
+    this.isBinaryFile = isBinaryFile;
   }
 }

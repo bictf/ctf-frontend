@@ -1,5 +1,5 @@
 export type LoginResponseFromServer = {
-  success: boolean;
+  success: boolean | undefined;
   passwordDiff: number[];
   cookie: string;
   time: number;

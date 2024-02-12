@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>{{question}}</h2>
+<mat-dialog-content>
+    <img *ngIf="image" src="image">
+    <mat-form-field>
+        <mat-label>הזן תשובה</mat-label>
+        <input type="text" matInput #answer onchange="updateAnswer(answer.value)">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="checkAnswer()">Submit</button>
+</mat-dialog-actions>

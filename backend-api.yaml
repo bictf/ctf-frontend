@@ -32,12 +32,12 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 $ref: #/components/schemas/LoginResponseToUser
   /login/doesUserLoggedIn:
     get:
-      tags: 
+      tags:
         - does user logged in
       summary: GET login/doesUserLoggedIn
       operationId: doesUserLoggedIn
@@ -51,7 +51,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 type: boolean
   /download:
@@ -91,7 +91,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 type: boolean
   /captcha/is-blocked:
@@ -104,24 +104,39 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 type: boolean
-  /captcha/questions:
+  /captcha/questions/choice:
     get:
       tags:
         - captcha questions
-      summary: GET captcha/questions
-      operationId: getAllCaptchaQuestions
+      summary: GET captcha/questions/choice
+      operationId: getAllChoiceCaptchaQuestions
       responses:
         200:
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 type: array
                 items:
-                  $ref: #/components/schemas/QuestionData
+                  $ref: #/components/schemas/ChoiceQuestionData
+  /captcha/questions/open:
+    get:
+      tags:
+        - captcha questions
+      summary: GET captcha/questions/open
+      operationId: getAllOpenCaptchaQuestions
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: #/components/schemas/OpenQuestionData
   /captcha/pictures:
     get:
       tags:
@@ -139,7 +154,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            'application/json':
               schema:
                 type: array
                 items:
@@ -160,7 +175,42 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            'application/json':
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+  /captcha/text_captchas:
+    get:
+      tags:
+        - captcha questions
+      summary: GET captcha/text_captchas
+      operationId: getTextCaptcha
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  type: string
+  /captcha/text_captchas/by_name:
+    get:
+      tags:
+        - captcha pictures by name
+      summary: GET captcha/text_captchas/by_name
+      operationId: getTextCaptcha
+      parameters:
+        - name: captchaName
+          in: query
+          required: false
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
               schema:
                 type: array
                 items:
@@ -168,13 +218,14 @@ paths:
                   format: byte
   /search:
     get:
-      tags: 
+      tags:
         - search
-      summary: GET search
+      summary: search api
       operationId: search
       parameters:
         - name: text
           in: query
+          description: The search regex
           required: true
           schema:
             type: string
@@ -182,7 +233,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: #/components/schemas/SearchResponseToUser
 components:
@@ -195,8 +246,8 @@ components:
         success:
           type: boolean
         passwordDiff:
-          type: integer
-          format: int32
+          type: array
+          items: number
         cookie:
           type: string
         time:
@@ -205,9 +256,12 @@ components:
       required:
         - passwordDiff
         - cookie
-    QuestionData:
+        - success
+        - time
+
+    ChoiceQuestionData:
       tags:
-        - question data
+        - choice question data
       type: object
       properties:
         title:
@@ -222,6 +276,18 @@ components:
       required:
         - title
         - answers
+    OpenQuestionData:
+      tags:
+        - open question data
+      type: object
+      properties:
+        title:
+          type: string
+        answer:
+          type: string
+      required:
+        - title
+        - answer
     SearchResponseToUser:
       tags:
         - search response to user
@@ -234,6 +300,8 @@ components:
           type: string
         content:
           type: string
+        isBinaryFile:
+          type: boolean
       required:
         - title
         - content

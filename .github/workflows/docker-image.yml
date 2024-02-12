@@ -18,12 +18,12 @@ jobs:
       run: docker build . --file Dockerfile --tag ctf-frontend:latest
     - name: Save the docker image
       run: docker save ctf-frontend:latest -o frontent.tar
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v4.2.0
-      with:
-        name: frontent-image
-        path: frontent.tar
-        if-no-files-found: error
-        retention-days: 90
+    # - name: Upload a Build Artifact
+    #   uses: actions/upload-artifact@v4.2.0
+    #   with:
+    #     name: frontent-image
+    #     path: frontent.tar
+    #     if-no-files-found: error
+    #     retention-days: 90
               
       

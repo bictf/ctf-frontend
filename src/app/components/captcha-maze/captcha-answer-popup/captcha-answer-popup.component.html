@@ -1,4 +1,7 @@
 <h2 mat-dialog-title>{{message}}</h2>
+<mat-dialog-content>
+    <h2 *ngIf="time > 0">time</h2>
+</mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>{{buttonTitle}}</button>
+    <button *ngIf="time <= 0" mat-button mat-dialog-close>{{buttonTitle}}</button>
 </mat-dialog-actions>

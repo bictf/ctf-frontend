@@ -21,23 +21,17 @@ import { MadeByLableComponent } from './components/made-by-lable/made-by-lable.c
 import { TimerComponent } from './components/timer/timer.component';
 import { AnswerPasswordDialogComponent } from './components/answer-password-dialog/answer-password-dialog.component';
 import { LootScreenComponent } from './screens/loot-screen/loot-screen.component';
-import { TrashScreenComponent } from './screens/trash-screen/trash-screen.component';
 import { CaptchaManagerComponent } from './components/captcha-maze/captcha-manager/captcha-manager.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CaptchaBackendHandlerComponent } from './components/captcha-maze/captcha-backend-handler/captcha-backend-handler.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
   { path: 'login', component: LoginScreenComponent },
-  //TODO - add CaptchaScreenComponent
   {
-    path: 'maze-level/biss-matzov-genesis-is-the-best',
-    component: LootScreenComponent,
+    path: 'captcha-level/biss-matzov-genesis-is-the-best',
+    component: CaptchaBackendHandlerComponent,
   },
-  {
-    path: 'maze-level/dead-end',
-    component: TrashScreenComponent,
-  },
-  //{ path: 'maze-level/:levelId', component: MazeLevelComponent },
   { path: 'access-denied', component: AccessDeniedScreenComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
@@ -56,7 +50,6 @@ const appRoutes: Routes = [
     TimerComponent,
     AnswerPasswordDialogComponent,
     LootScreenComponent,
-    TrashScreenComponent, 
     LoginFormComponent,
     DataScreenComponent,
     CaptchaManagerComponent,

@@ -1,0 +1,5 @@
+<button class="download" (click)="openPopup()">
+    Download File
+</button>
+
+<app-start-captchas-dialog [isOpen]="isDialogOpen" (onSubmit)="goToCaptchas()" (onClose)="isDialogOpen = false"></app-start-captchas-dialog>

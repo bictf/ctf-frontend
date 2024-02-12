@@ -1,19 +1,23 @@
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
-    color: rgb(96, 38, 30) !important;
+    color: rgb(117, 98, 55) !important;
 } 
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
     text-align: center !important;
-    background-color: rgb(171, 148, 145) !important;
+    background-color: rgb(227, 222, 181) !important;
 }
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
     direction: rtl !important;
-    background-color: #f5f5f54d !important;
+    background-color: rgba(117, 98, 55, 0.648) !important;
 }
 
 ::ng-deep .mat-mdc-button:not(:disabled) {
     color: white !important;
-    background-color: rgb(96, 38, 30);
+    background-color: rgb(117, 98, 55) ;
     margin: 10px;
+}
+
+.clicked {     
+    background-color:rgba(128, 109, 15, 0.543);    
 }
