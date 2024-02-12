@@ -23,14 +23,14 @@ import { AnswerPasswordDialogComponent } from './components/answer-password-dial
 import { LootScreenComponent } from './screens/loot-screen/loot-screen.component';
 import { CaptchaManagerComponent } from './components/captcha-maze/captcha-manager/captcha-manager.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CaptchaBackendHandlerComponent } from './components/captcha-maze/captcha-backend-handler/captcha-backend-handler.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
   { path: 'login', component: LoginScreenComponent },
-  //TODO - add CaptchaScreenComponent
   {
-    path: 'maze-level/biss-matzov-genesis-is-the-best',
-    component: LootScreenComponent,
+    path: 'captcha-level/biss-matzov-genesis-is-the-best',
+    component: CaptchaBackendHandlerComponent,
   },
   { path: 'access-denied', component: AccessDeniedScreenComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
