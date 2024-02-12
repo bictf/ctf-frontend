@@ -4,6 +4,7 @@ import { CaptchaAnswerPopupComponent } from '../captcha-answer-popup/captcha-ans
 import { CaptchaConsts } from '../captcha-consts';
 import { Captcha } from '../captcha';
 import { CanSkipCaptchaService } from "../../../modules/openapi/services/can-skip-captcha.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-captcha-manager',
@@ -18,7 +19,7 @@ export class CaptchaManagerComponent {
   currentSleep = 5;
 
 
-  constructor(private dialog: MatDialog, private canContinueService: CanSkipCaptchaService) {}
+  constructor(private router: Router, private dialog: MatDialog, private canContinueService: CanSkipCaptchaService) {}
 
   openCaptcha() {
     if (this.currentCaptcha?.captchaComponent) {
@@ -79,7 +80,7 @@ export class CaptchaManagerComponent {
       if (!this.canContinue) {
         this.currentCaptcha = this.captchaList[this.currentCaptchaIndex++]
       } else {
-        //Continue with CTF
+        this.router.navigate(['captcha-level']);
       }
   }
 }
