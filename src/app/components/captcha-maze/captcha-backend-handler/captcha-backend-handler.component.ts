@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AmericanQuestionCaptchaComponent } from '../captchas/american-question-captcha/american-question-captcha.component';
 import { ImageGridCaptchaComponent } from '../captchas/image-grid-captcha/image-grid-captcha.component';
 import { ChangeDetectorRef } from '@angular/core';
+import { SingleImageGridCaptchaComponent } from '../captchas/single-image-grid-captcha/single-image-grid-captcha.component';
 
 @Component({
   selector: 'app-captcha-backend-handler',
@@ -83,13 +84,31 @@ export class CaptchaBackendHandlerComponent {
     })
   }
 
+  // getImageGridCaptchas(){
+  //   return new Promise<void>((resolve, reject) => {
+  //     this.captchaPictureService.getSomePictures().subscribe(
+  //       (result) => {
+  //         for (let i = 0; i < result.length - 9 ; i++) {
+  //           let captchaData = {question: "סמנו את התמונות בהם מופיעים מפקדי הצבא הציוני", image: null, options: [result[i], result[i+1], result[i+2], result[i+3], result[i+4], result[i+5], result[6], result[i+7], result[i+8]], correctAnswer: null}
+  //           this.captchaList.push(new Captcha(captchaData, ImageGridCaptchaComponent))
+  //         }
+  //         resolve()
+  //       },
+  //       (error) => {
+  //         this.snackBar.open(error.error, '', {duration: 3000, panelClass: 'error-snack-bar'})
+  //         reject(error)
+  //       }
+  //     )
+  //   })
+  // }
+
   getImageGridCaptchas(){
     return new Promise<void>((resolve, reject) => {
       this.captchaPictureService.getSomePictures().subscribe(
         (result) => {
-          for (let i = 0; i < result.length - 9 ; i++) {
-            let captchaData = {question: "סמנו את התמונות בהם מופיעים מפקדי הצבא הציוני", image: null, options: [result[i], result[i+1], result[i+2], result[i+3], result[i+4], result[i+5], result[6], result[i+7], result[i+8]], correctAnswer: null}
-            this.captchaList.push(new Captcha(captchaData, ImageGridCaptchaComponent))
+          for (let image of result) {
+            let captchaData = {question: "סמנו את התמונות בהן מופיעים מפקדי הצבא הציוני", image: image, options: null, correctAnswer: [0]}
+            this.captchaList.push(new Captcha(captchaData, SingleImageGridCaptchaComponent))
           }
           resolve()
         },
