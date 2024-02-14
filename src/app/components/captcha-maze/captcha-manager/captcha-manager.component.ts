@@ -19,7 +19,13 @@ export class CaptchaManagerComponent {
   currentSleep = 5;
 
 
-  constructor(private router: Router, private dialog: MatDialog, private canContinueService: CanSkipCaptchaService) {}
+  constructor(private router: Router, private dialog: MatDialog, private canContinueService: CanSkipCaptchaService) {
+  }
+
+  ngOnInit() {
+    this.currentCaptcha = this.captchaList[this.currentCaptchaIndex]
+    this.openCaptcha();
+  }
 
   openCaptcha() {
     if (this.currentCaptcha?.captchaComponent) {

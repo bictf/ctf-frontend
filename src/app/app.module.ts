@@ -24,12 +24,14 @@ import { LootScreenComponent } from './screens/loot-screen/loot-screen.component
 import { CaptchaManagerComponent } from './components/captcha-maze/captcha-manager/captcha-manager.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CaptchaBackendHandlerComponent } from './components/captcha-maze/captcha-backend-handler/captcha-backend-handler.component';
+import { StartCaptchasButtonComponent } from './components/captcha-maze/start-captchas-button/start-captchas-button.component';
+import { StartCaptchasDialogComponent } from './components/captcha-maze/start-captchas-dialog/start-captchas-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
   { path: 'login', component: LoginScreenComponent },
   {
-    path: 'captcha-level/biss-matzov-genesis-is-the-best',
+    path: 'captcha-level',
     component: CaptchaBackendHandlerComponent,
   },
   { path: 'access-denied', component: AccessDeniedScreenComponent },
@@ -53,6 +55,9 @@ const appRoutes: Routes = [
     LoginFormComponent,
     DataScreenComponent,
     CaptchaManagerComponent,
+    CaptchaBackendHandlerComponent,
+    StartCaptchasButtonComponent,
+    StartCaptchasDialogComponent,
   ],
   imports: [
     BrowserModule,

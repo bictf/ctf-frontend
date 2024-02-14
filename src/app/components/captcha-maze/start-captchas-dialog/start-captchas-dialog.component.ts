@@ -2,8 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-start-captchas-dialog',
-  standalone: true,
-  imports: [],
   templateUrl: './start-captchas-dialog.component.html',
   styleUrl: './start-captchas-dialog.component.scss'
 })

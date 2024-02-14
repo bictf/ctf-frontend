@@ -1,1 +1,1 @@
-<app-captcha-manager *ngIf="captchaList" captchaList="shuffleCaptchaList(captchaList)"></app-captcha-manager>
+<app-captcha-manager *ngIf="this.hasInitialized && captchaList.length > 0" [captchaList]="captchaList"></app-captcha-manager>
