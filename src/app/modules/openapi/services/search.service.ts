@@ -11,7 +11,6 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { search } from '../fn/search/search';
 import { Search$Params } from '../fn/search/search';
-import { SearchResponseToUser } from '../models/search-response-to-user';
 
 @Injectable({ providedIn: 'root' })
 export class SearchService extends BaseService {
@@ -32,7 +31,7 @@ export class SearchService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  search$Response(params: Search$Params, context?: HttpContext): Observable<StrictHttpResponse<SearchResponseToUser>> {
+  search$Response(params: Search$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
     return search(this.http, this.rootUrl, params, context);
   }
 
@@ -46,9 +45,9 @@ export class SearchService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  search(params: Search$Params, context?: HttpContext): Observable<SearchResponseToUser> {
+  search(params: Search$Params, context?: HttpContext): Observable<any> {
     return this.search$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SearchResponseToUser>): SearchResponseToUser => r.body)
+      map((r: StrictHttpResponse<any>): any => r.body)
     );
   }
 

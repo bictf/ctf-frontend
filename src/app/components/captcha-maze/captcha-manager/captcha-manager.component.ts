@@ -53,6 +53,12 @@ export class CaptchaManagerComponent {
 
     const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
     dialogRef.disableClose = true;
+    dialogRef.afterClosed().subscribe(
+      result => {
+        this.getNextCaptcha()
+        this.openCaptcha()
+      }
+    )
   }
 
   openWrongAnswerPopup() {
@@ -65,27 +71,30 @@ export class CaptchaManagerComponent {
     this.currentSleep += 10;
     const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
     dialogRef.disableClose = true;
+    dialogRef.afterClosed().subscribe(
+      result => this.openCaptcha()
+    )
   }
 
   handleResult(result: boolean){
     if (result){
       this.openCorrectAnswerPopup()
-      this.getNextCaptcha()
     } else {
       this.openWrongAnswerPopup()
     }
-    this.openCaptcha()
   }
 
   getNextCaptcha() {
+    // TODO make this async
     this.canContinueService.canSkipCaptcha().subscribe(
       (canContinue: boolean) => {
         this.canContinue = canContinue;
       })
 
       if (!this.canContinue) {
-        this.currentCaptcha = this.captchaList[this.currentCaptchaIndex++]
+        this.currentCaptcha = this.captchaList[++this.currentCaptchaIndex]
       } else {
+        // TODO check this works
         this.router.navigate(['captcha-level']);
       }
   }

@@ -24,6 +24,7 @@ export class CaptchaBackendHandlerComponent {
   }
 
   async initializeCaptchaList() {
+    // TODO fix the picture fetching and all that.
     await this.getImageGridCaptchas()
     await this.getMultipleAnswerQuestionCaptchas()
     console.log(this.captchaList)
@@ -39,7 +40,7 @@ export class CaptchaBackendHandlerComponent {
       let index = Math.floor(Math.random() * (listLength - 1))
       let temp = captchaList[index]
       captchaList[index] = captchaList[i]
-      captchaList[i] = temp 
+      captchaList[i] = temp
     }
     return captchaList
   }
