@@ -16,8 +16,10 @@ export class CaptchaManagerComponent {
   currentCaptchaIndex = 0;
   currentCaptcha?: Captcha;
   canContinue: boolean = false;
+  // Sleep configuration
   currentSleep = 5;
-
+  MIN_SLEEP_DURATION : number = 5;
+  MAX_SLEEP_DURATION : number = 60;
 
   constructor(private router: Router, private dialog: MatDialog, private canContinueService: CanSkipCaptchaService) {
   }
@@ -56,6 +58,8 @@ export class CaptchaManagerComponent {
     let message = CaptchaConsts.CORRECT_ANSWER_MESSAGE[randomMessageIndex]
     dialogConfig.data = {message: message, buttonTitle: "המשך", time: 0};
 
+    this.currentSleep = Math.max(this.MIN_SLEEP_DURATION, this.currentSleep - 10)
+
     const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
     dialogRef.disableClose = true;
     dialogRef.afterClosed().subscribe(
@@ -73,7 +77,8 @@ export class CaptchaManagerComponent {
     let message = CaptchaConsts.WRONG_ANSWER_MESSAGES[randomMessageIndex]
     dialogConfig.data = {message: message, buttonTitle: "נסו שוב", time: this.currentSleep};
 
-    this.currentSleep += 10;
+    this.currentSleep = Math.min(this.MAX_SLEEP_DURATION, this.currentSleep + 10)
+
     const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
     dialogRef.disableClose = true;
     dialogRef.afterClosed().subscribe(
@@ -82,7 +87,7 @@ export class CaptchaManagerComponent {
   }
 
   handleResult(result: boolean) {
-    if (this.canContinue) {
+    if (!this.canContinue) {
       if (result) {
         this.openCorrectAnswerPopup()
       } else {
