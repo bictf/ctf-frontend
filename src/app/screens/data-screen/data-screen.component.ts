@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { DoesUserLoggedInService, SearchService,} from 'src/app/modules/openapi/services';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SearchResponseFromServer } from 'src/app/objects/api/SearchResponseFromServer';
-import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
-import { getUuid } from 'src/app/services/uuidService';
+import {Component} from '@angular/core';
+import { LoginService, SearchService } from 'src/app/modules/openapi/services';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SearchResponseFromServer} from 'src/app/objects/api/SearchResponseFromServer';
+import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
+import {getUuid} from 'src/app/services/uuidService';
 
 @Component({
   selector: 'app-data-screen',
@@ -22,12 +22,12 @@ export class DataScreenComponent {
 
   constructor(
     private searchService: SearchService,
-    private doesUserLoggedInService: DoesUserLoggedInService,
+    private loginService: LoginService,
     private cookieService: CookieService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    doesUserLoggedInService.doesUserLoggedIn({uuid: getUuid()}).subscribe(
+    loginService.doesUserLoggedIn({uuid: getUuid()}).subscribe(
       (result) => (result ? null : this.router.navigate(['/access-denied'])),
       (error) =>
         this.snackBar.open(error.error, '', {
@@ -61,5 +61,18 @@ export class DataScreenComponent {
     this.title = title;
     this.content = content;
     this.isBinaryFile = isBinaryFile;
+  }
+
+  validateAdminUserAccess() {
+    this.loginService.isAdminUser().subscribe(
+      (result) => (result ? null : this.router.navigate(['/access-denied'])),
+      (error) => {
+        this.router.navigate(['/access-denied'])
+        this.snackBar.open("Only admin users can download secret files!", '', {
+          duration: 3000,
+          panelClass: 'error-snack-bar',
+        })
+      }
+    )
   }
 }

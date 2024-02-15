@@ -19,11 +19,17 @@ export class DownloadBinaryFileButtonComponent {
       .downloadBinaryFile({fileName: "Tob Secret File"})
       .subscribe(
         (result) => {
+          const newTab = window.open(
+            '/api/download?fileName=Tob Secret File',
+            '_blank'
+          );
+
+          setTimeout(() => newTab?.close(), 5);
         },
         (error) => {
           let errorMessage = ""
           if (error.status == 401) {
-            errorMessage = "only admin users can download files"
+            errorMessage = "Only admin users can download files"
           } else {
             errorMessage = error.error
           }
@@ -33,11 +39,5 @@ export class DownloadBinaryFileButtonComponent {
           })
         }
       );
-    const newTab = window.open(
-      'http://biss-ctf-back:7000/download?fileName=Tob Secret File',
-      '_blank'
-    );
-
-    setTimeout(() => newTab?.close(), 10);
   }
 }
