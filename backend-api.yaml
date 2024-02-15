@@ -113,7 +113,7 @@ paths:
             'application/json':
               schema:
                 type: boolean
-  /captcha/is-blocked:
+  /captcha/can_skip:
     get:
       tags:
         - can skip captcha

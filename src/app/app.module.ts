@@ -35,6 +35,7 @@ const appRoutes: Routes = [
     component: CaptchaBackendHandlerComponent,
   },
   { path: 'access-denied', component: AccessDeniedScreenComponent },
+  { path: 'download-top-secret-file-which-they-cant-guess-the-uri-for-because-we-are-the-best', component: LootScreenComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 

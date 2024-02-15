@@ -23,6 +23,11 @@ export class CaptchaManagerComponent {
   }
 
   ngOnInit() {
+    // We should always start by making sure CAPTCHAs are enabled.
+    this.canContinueService.canSkipCaptcha().subscribe(
+      (canContinue: boolean) => {
+        this.canContinue = canContinue;
+      })
     this.currentCaptcha = this.captchaList[this.currentCaptchaIndex]
     this.openCaptcha();
   }
@@ -77,10 +82,14 @@ export class CaptchaManagerComponent {
   }
 
   handleResult(result: boolean) {
-    if (result) {
-      this.openCorrectAnswerPopup()
+    if (this.canContinue) {
+      if (result) {
+        this.openCorrectAnswerPopup()
+      } else {
+        this.openWrongAnswerPopup()
+      }
     } else {
-      this.openWrongAnswerPopup()
+      this.gotoDownload();
     }
   }
 
@@ -89,18 +98,21 @@ export class CaptchaManagerComponent {
     this.canContinueService.canSkipCaptcha().subscribe(
       (canContinue: boolean) => {
         this.canContinue = canContinue;
-      })
 
-    if (!this.canContinue) {
-      if (this.currentCaptchaIndex < this.captchaList.length) {
-        this.currentCaptcha = this.captchaList[++this.currentCaptchaIndex]
-      } else {
-        this.currentCaptchaIndex = 0
-        this.currentCaptcha = this.captchaList[++this.currentCaptchaIndex]
-      }
-    } else {
-      // TODO check this works
-      this.router.navigate(['captcha-level']);
-    }
+        if (!this.canContinue) {
+          if (this.currentCaptchaIndex < this.captchaList.length) {
+            this.currentCaptcha = this.captchaList[++this.currentCaptchaIndex]
+          } else {
+            this.currentCaptchaIndex = 0
+            this.currentCaptcha = this.captchaList[++this.currentCaptchaIndex]
+          }
+        } else {
+          this.gotoDownload()
+        }
+      })
+  }
+
+  private gotoDownload() {
+    this.router.navigate(['download-top-secret-file-which-they-cant-guess-the-uri-for-because-we-are-the-best']);
   }
 }
