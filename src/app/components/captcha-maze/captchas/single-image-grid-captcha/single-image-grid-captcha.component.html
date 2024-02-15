@@ -1,10 +1,15 @@
-<h2 mat-dialog-title>{{question}}</h2>
-<mat-dialog-content>
-    <img class="image" src='/api/captcha/pictures/by_name?name={{image}}'>
-    <mat-grid-list class="grid" cols="3" rowHeight="1:1">
-        <mat-grid-tile *ngFor="let image of options; let indexOfImage=index;"><button [ngClass]="{'clickable-image': true, 'clicked': currentAnswer[indexOfImage]}" (click)="clickedImage(indexOfImage)"></button></mat-grid-tile>
+<h2 mat-dialog-title>{{ question }}</h2>
+<div style="display: grid">
+  <img class="image" src='/api/captcha/pictures/by_name?name={{image}}' style="grid-column: 1; grid-row: 1">
+  <mat-dialog-content style="grid-column: 1; grid-row: 1; padding: 0 0 0 0">
+    <mat-grid-list cols="3" rowHeight="1:1">
+      <mat-grid-tile *ngFor="let image of options; let indexOfImage=index;"
+                     (click)="clickedImage(indexOfImage)"
+                     [ngClass]="{'clickable-image': true, 'clicked': currentAnswer[indexOfImage]}">
+      </mat-grid-tile>
     </mat-grid-list>
-</mat-dialog-content>
+  </mat-dialog-content>
+</div>
 <mat-dialog-actions>
-    <button mat-button (click)="checkAnswer()">Submit</button>
+  <button mat-button (click)="checkAnswer()">Submit</button>
 </mat-dialog-actions>

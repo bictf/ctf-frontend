@@ -127,7 +127,7 @@ export class CaptchaBackendHandlerComponent {
       this.captchaPictureService.getSomePictures().subscribe(
         (result) => {
           for (let image of result) {
-            let captchaData = {question: "סמנו את התמונות בהן מופיעים מפקדי הצבא הציוני", image: image, options: null, correctAnswer: [0]}
+            let captchaData = {question: "סמנו את הריבועים בהם מופיעים מפקדי הצבא הציוני", image: image, options: null, correctAnswer: [0]}
             this.captchaList.push(new Captcha(captchaData, SingleImageGridCaptchaComponent))
           }
           resolve()
