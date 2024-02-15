@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {MatDialogConfig, MatDialog} from '@angular/material/dialog';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { CaptchaAnswerPopupComponent } from '../captcha-answer-popup/captcha-answer-popup.component';
 import { CaptchaConsts } from '../captcha-consts';
 import { Captcha } from '../captcha';
@@ -76,8 +76,8 @@ export class CaptchaManagerComponent {
     )
   }
 
-  handleResult(result: boolean){
-    if (result){
+  handleResult(result: boolean) {
+    if (result) {
       this.openCorrectAnswerPopup()
     } else {
       this.openWrongAnswerPopup()
@@ -91,11 +91,16 @@ export class CaptchaManagerComponent {
         this.canContinue = canContinue;
       })
 
-      if (!this.canContinue) {
+    if (!this.canContinue) {
+      if (this.currentCaptchaIndex < this.captchaList.length) {
         this.currentCaptcha = this.captchaList[++this.currentCaptchaIndex]
       } else {
-        // TODO check this works
-        this.router.navigate(['captcha-level']);
+        this.currentCaptchaIndex = 0
+        this.currentCaptcha = this.captchaList[++this.currentCaptchaIndex]
       }
+    } else {
+      // TODO check this works
+      this.router.navigate(['captcha-level']);
+    }
   }
 }

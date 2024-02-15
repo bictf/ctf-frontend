@@ -27,8 +27,9 @@ export class CaptchaBackendHandlerComponent {
     // TODO fix the picture fetching and all that.
     await this.getImageGridCaptchas()
     await this.getMultipleAnswerQuestionCaptchas()
-    console.log(this.captchaList)
     await this.getOpenQuestionCaptchas()
+    await this.getTextRecognitionCaptchas()
+    console.log(this.captchaList)
 
     this.captchaList = this.shuffleCaptchaList(this.captchaList)
     this.hasInitialized = true
@@ -50,7 +51,25 @@ export class CaptchaBackendHandlerComponent {
       this.captchaQuestionService.getAllOpenCaptchaQuestions().subscribe(
         (result) => {
           for (let question of result){
-            let captchaData = {question: "הזינו את המילה המופיעה בתמונה על מנת להוכיח שאינכם ציוניים", image: question.title, options: null, correctAnswer: question.answer}
+            let captchaData = {question: question.title, image: null, options: null, correctAnswer: question.answer.toString()}
+            this.captchaList.push(new Captcha(captchaData, OpenQuestionCaptchaComponent))
+          }
+          resolve()
+        },
+        (error) => {
+          this.snackBar.open(error.error, '', {duration: 3000, panelClass: 'error-snack-bar'})
+          reject(error)
+        }
+      )
+    })
+  }
+
+  async getTextRecognitionCaptchas(){
+    return new Promise<void>((resolve, reject) => {
+      this.captchaQuestionService.getTextCaptcha().subscribe(
+        (result) => {
+          for (let question of result){
+            let captchaData = {question: "הזינו את המילה המופיעה בתמונה על מנת להוכיח שאינכם ציוניים", image: question, options: null, correctAnswer: question}
             this.captchaList.push(new Captcha(captchaData, OpenQuestionCaptchaComponent))
           }
           resolve()

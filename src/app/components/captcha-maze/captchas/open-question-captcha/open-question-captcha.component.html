@@ -1,11 +1,13 @@
 <h2 mat-dialog-title>{{question}}</h2>
 <mat-dialog-content>
-    <img *ngIf="image" src="image">
+    <img *ngIf="image" src='/api/captcha/pictures/by_name?name={{image}}'>
+    <br *ngIf="image">
+    <br *ngIf="image">
     <mat-form-field>
         <mat-label>הזן תשובה</mat-label>
-        <input type="text" matInput #answer onchange="updateAnswer(answer.value)">
+        <input type="text" matInput #answer>
     </mat-form-field>
-</mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button (click)="checkAnswer()">Submit</button>
+    <button mat-button (click)="checkAnswer(answer.value)">Submit</button>
 </mat-dialog-actions>
+</mat-dialog-content>

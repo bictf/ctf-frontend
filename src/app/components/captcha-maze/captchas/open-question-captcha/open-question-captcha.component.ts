@@ -30,11 +30,7 @@ export class OpenQuestionCaptchaComponent {
     this.correctAnswer = data.correctAnswer
   }
 
-  updateAnswer(answer: string) {
-    this.currentAnswer = answer
-  }
-
-  checkAnswer() {
-    this.dialogRef.close(this.currentAnswer == this.correctAnswer);
+  checkAnswer(answer:string) {
+    this.dialogRef.close(answer == this.correctAnswer);
   }
 }

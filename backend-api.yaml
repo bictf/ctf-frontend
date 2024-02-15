@@ -168,12 +168,10 @@ paths:
         200:
           description: OK
           content:
-            'application/json':
+            image/*: # Media type
               schema:
-                type: array
-                items:
-                  type: string
-                  format: byte
+                type: string
+                format: binary
   /captcha/text_captchas:
     get:
       tags:
