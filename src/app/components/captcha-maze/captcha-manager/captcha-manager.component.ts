@@ -82,7 +82,7 @@ export class CaptchaManagerComponent {
   }
 
   handleResult(result: boolean) {
-    if (this.canContinue) {
+    if (!this.canContinue) {
       if (result) {
         this.openCorrectAnswerPopup()
       } else {
