@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{question}}</h2>
 <mat-dialog-content>
-    <img class="image" [src]=image>
+    <img class="image" src='/api/captcha/pictures/by_name?name={{image}}'>
     <mat-grid-list class="grid" cols="3" rowHeight="1:1">
         <mat-grid-tile *ngFor="let image of options; let indexOfImage=index;"><button [ngClass]="{'clickable-image': true, 'clicked': currentAnswer[indexOfImage]}" (click)="clickedImage(indexOfImage)"></button></mat-grid-tile>
     </mat-grid-list>
