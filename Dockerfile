@@ -3,7 +3,7 @@ FROM node:21 AS build
 COPY . /code
 WORKDIR /code
 RUN npm install
-RUN npm run build
+RUN npm run build-release
 
 ### STAGE 2:RUN ###
 # Defining nginx image to be used

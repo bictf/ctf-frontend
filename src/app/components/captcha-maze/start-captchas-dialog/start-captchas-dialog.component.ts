@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-go-to-maze-dialog',
-  templateUrl: './go-to-maze-dialog.component.html',
-  styleUrls: ['./go-to-maze-dialog.component.scss']
+  selector: 'app-start-captchas-dialog',
+  templateUrl: './start-captchas-dialog.component.html',
+  styleUrl: './start-captchas-dialog.component.scss'
 })
-export class GoToMazeDialogComponent {
+export class StartCaptchasDialogComponent {
   @Input() isOpen: boolean = false
   @Output() onSubmit: EventEmitter<void> = new EventEmitter<void>();
   @Output() onClose: EventEmitter<void> = new EventEmitter<void>();

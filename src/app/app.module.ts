@@ -21,17 +21,21 @@ import { MadeByLableComponent } from './components/made-by-lable/made-by-lable.c
 import { TimerComponent } from './components/timer/timer.component';
 import { AnswerPasswordDialogComponent } from './components/answer-password-dialog/answer-password-dialog.component';
 import { LootScreenComponent } from './screens/loot-screen/loot-screen.component';
-import { StartMazeButtonComponent } from './components/start-maze-button/start-maze-button.component';
-import { GoToMazeDialogComponent } from './components/go-to-maze-dialog/go-to-maze-dialog.component';
+import { CaptchaManagerComponent } from './components/captcha-maze/captcha-manager/captcha-manager.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CaptchaBackendHandlerComponent } from './components/captcha-maze/captcha-backend-handler/captcha-backend-handler.component';
+import { StartCaptchasButtonComponent } from './components/captcha-maze/start-captchas-button/start-captchas-button.component';
+import { StartCaptchasDialogComponent } from './components/captcha-maze/start-captchas-dialog/start-captchas-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
   { path: 'login', component: LoginScreenComponent },
   {
-    path: 'maze-level/biss-matzov-genesis-is-the-best',
-    component: LootScreenComponent,
+    path: 'captcha-level',
+    component: CaptchaBackendHandlerComponent,
   },
   { path: 'access-denied', component: AccessDeniedScreenComponent },
+  { path: 'download-top-secret-file-which-they-cant-guess-the-uri-for-because-we-are-the-best', component: LootScreenComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -40,9 +44,7 @@ const appRoutes: Routes = [
     AppComponent,
     LoginScreenComponent,
     InputFieldComponent,
-    LoginFormComponent,
     WordleAnswerComponent,
-    DataScreenComponent,
     SearchFormComponent,
     AccessDeniedScreenComponent,
     AccessDeniedComponent,
@@ -51,8 +53,12 @@ const appRoutes: Routes = [
     TimerComponent,
     AnswerPasswordDialogComponent,
     LootScreenComponent,
-    StartMazeButtonComponent,
-    GoToMazeDialogComponent,
+    LoginFormComponent,
+    DataScreenComponent,
+    CaptchaManagerComponent,
+    CaptchaBackendHandlerComponent,
+    StartCaptchasButtonComponent,
+    StartCaptchasDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +68,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatTabsModule,
     RouterModule.forRoot(appRoutes),
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

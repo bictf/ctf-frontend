@@ -1,8 +1,0 @@
-<button 
-[ngClass]="('maze-button ' + (hasAccessToDownload ? 'enable' : 'disable'))"
-(click)="openPopup()"
->
-    Download File
-</button>
-
-<app-go-to-maze-dialog [isOpen]="isDialogOpen" (onSubmit)="goToMaze()" (onClose)="isDialogOpen = false"></app-go-to-maze-dialog>

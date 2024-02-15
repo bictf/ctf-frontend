@@ -4,13 +4,7 @@
     color: #FFFFFF;
 }
 
-.disable{
-    background-color: #999999;
-    color: #FFFFFF;
-    cursor: not-allowed;
-}
-
-.maze-button{
+.download{
     border-radius: 15px;
     box-sizing: border-box;
     border: 0;
@@ -29,11 +23,6 @@
     box-shadow: -5px 5px 20px -10px black, 5px -5px 20px -20px black;
 }
 
-.enable:hover{
+.download:hover{
     filter: brightness(95%);
-}
-
-.enable:active{
-    filter: brightness(85%);
-    box-shadow: inset -5px 5px 20px -10px black, inset 5px -5px 20px -20px black;
 }
