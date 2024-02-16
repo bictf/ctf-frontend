@@ -1,6 +1,5 @@
 import { Component, ViewChild} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoginService } from '../../modules/openapi/services'
 import { LoginResponseFromServer } from 'src/app/objects/api/LoginResponseFromServer';
 import { WordleAnswerComponent } from '../wordle-answer/wordle-answer.component';
 import { Router } from '@angular/router';
@@ -8,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { getUuid } from 'src/app/services/uuidService';
 import { TimerComponent } from '../timer/timer.component';
+import {LoginService} from "../../modules/openapi/services/login.service";
 
 @Component({
   selector: 'app-login-form',
@@ -35,6 +35,13 @@ export class LoginFormComponent {
   }
 
   login() {
+    if (this.password.length == 0) {
+      this.snackBar.open("Password cannot be empty!", '', {
+        duration: 3000,
+        panelClass: 'error-snack-bar',
+      })
+      return
+    }
     this.loginService
       .login({
         uuid: getUuid(),
@@ -74,7 +81,7 @@ export class LoginFormComponent {
 
   loginWithGoogle() {
     this.snackBar.open(
-      'Who the hell is trying to login with Google in isolated network?!🤦‍♂️',
+      'Who the hell is trying to login with Google in an isolated network?!🤦‍♂️',
       '',
       {duration: 3000}
     );

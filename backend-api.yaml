@@ -210,26 +210,26 @@ paths:
                       type: "string"
                     solution:
                       type: string
-  /captcha/text_captchas/by_name:
-    get:
-      tags:
-        - captcha pictures by name
-      summary: GET captcha/text_captchas/by_name
-      operationId: getTextCaptcha
-      parameters:
-        - name: captchaName
-          in: query
-          required: false
-      responses:
-        200:
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  type: string
-                  format: byte
+#  /captcha/text_captchas/by_name:
+#    get:
+#      tags:
+#        - captcha pictures by name
+#      summary: GET captcha/text_captchas/by_name
+#      operationId: getTextCaptchaByName
+#      parameters:
+#        - name: captchaName
+#          in: query
+#          required: false
+#      responses:
+#        200:
+#          description: OK
+#          content:
+#            'application/json':
+#              schema:
+#                type: array
+#                items:
+#                  type: string
+#                  format: byte
   /search:
     get:
       tags:

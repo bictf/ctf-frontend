@@ -5,7 +5,7 @@
     <br *ngIf="image">
     <mat-form-field>
         <mat-label>הזן תשובה</mat-label>
-        <input type="text" matInput #answer>
+        <input type="text" matInput #answer (keyup.enter)="checkAnswer(answer.value)">
     </mat-form-field>
 <mat-dialog-actions>
     <button mat-button (click)="checkAnswer(answer.value)">Submit</button>

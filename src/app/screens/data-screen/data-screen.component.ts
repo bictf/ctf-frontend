@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import { LoginService, SearchService } from 'src/app/modules/openapi/services';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SearchResponseFromServer} from 'src/app/objects/api/SearchResponseFromServer';
 import {CookieService} from 'ngx-cookie-service';
 import {Router} from '@angular/router';
 import {getUuid} from 'src/app/services/uuidService';
+import {SearchService} from "../../modules/openapi/services/search.service";
+import {LoginService} from "../../modules/openapi/services/login.service";
 
 @Component({
   selector: 'app-data-screen',

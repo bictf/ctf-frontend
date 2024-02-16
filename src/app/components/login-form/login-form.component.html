@@ -3,7 +3,7 @@
         Login to your Account
     </div>
     <div class="fields-container">
-        <app-input-field (valueChange)="this.username = $event" label="Username"></app-input-field>
+        <app-input-field (valueChange)="this.username = $event" label="Username" (keyup.enter)="this.login()"></app-input-field>
         <app-input-field (valueChange)="this.password = $event" label="Password" (keyup.enter)="this.login()"></app-input-field>
     </div>
     <div class="buttons-container">

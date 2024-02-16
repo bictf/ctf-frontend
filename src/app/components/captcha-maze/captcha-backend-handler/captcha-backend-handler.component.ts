@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { Captcha } from '../captcha';
-import { CaptchaPicturesByNameService } from 'src/app/modules/openapi/services';
 import { OpenQuestionCaptchaComponent } from '../captchas/open-question-captcha/open-question-captcha.component';
-import { CaptchaPicturesService } from 'src/app/modules/openapi/services/captcha-pictures.service';
-import { CaptchaQuestionsService } from 'src/app/modules/openapi/services/captcha-questions.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AmericanQuestionCaptchaComponent } from '../captchas/american-question-captcha/american-question-captcha.component';
-import { ImageGridCaptchaComponent } from '../captchas/image-grid-captcha/image-grid-captcha.component';
-import { ChangeDetectorRef } from '@angular/core';
 import { SingleImageGridCaptchaComponent } from '../captchas/single-image-grid-captcha/single-image-grid-captcha.component';
+import { CaptchaPicturesService } from "../../../modules/openapi/services/captcha-pictures.service";
+import { CaptchaQuestionsService } from "../../../modules/openapi/services/captcha-questions.service";
+import { CaptchaPicturesByNameService } from "../../../modules/openapi/services/captcha-pictures-by-name.service";
 
 @Component({
   selector: 'app-captcha-backend-handler',
