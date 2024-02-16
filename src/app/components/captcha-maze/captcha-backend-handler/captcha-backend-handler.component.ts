@@ -27,7 +27,6 @@ export class CaptchaBackendHandlerComponent {
     await this.getMultipleAnswerQuestionCaptchas()
     await this.getOpenQuestionCaptchas()
     await this.getTextRecognitionCaptchas()
-    console.log(this.captchaList)
 
     this.captchaList = this.shuffleCaptchaList(this.captchaList)
     this.hasInitialized = true
@@ -35,13 +34,16 @@ export class CaptchaBackendHandlerComponent {
 
   shuffleCaptchaList(captchaList: Captcha[]) : Captcha[] {
     const listLength = captchaList.length
-    for (let i=0; i < listLength; i++) {
+    const shuffledList: Captcha[] = []
+    while (captchaList.length != 0) {
       let index = Math.floor(Math.random() * (listLength - 1))
-      let temp = captchaList[index]
-      captchaList[index] = captchaList[i]
-      captchaList[i] = temp
+      const newCaptcha = captchaList[index]
+      captchaList.splice(index, 1)
+      if (newCaptcha!==undefined) {
+        shuffledList.push(newCaptcha)
+      }
     }
-    return captchaList
+    return shuffledList
   }
 
   async getOpenQuestionCaptchas(){

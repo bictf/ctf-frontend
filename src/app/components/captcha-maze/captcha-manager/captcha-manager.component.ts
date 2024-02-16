@@ -25,13 +25,11 @@ export class CaptchaManagerComponent {
   }
 
   ngOnInit() {
-    // We should always start by making sure CAPTCHAs are enabled.
-    this.canContinueService.canSkipCaptcha().subscribe(
-      (canContinue: boolean) => {
-        this.canContinue = canContinue;
-      })
-    this.currentCaptcha = this.captchaList[this.currentCaptchaIndex]
-    this.openCaptcha();
+    this.currentCaptcha = this.captchaList[0]
+    this.currentCaptchaIndex += 1
+    this.checkApiContinue().then(r => {
+      this.openCaptcha();
+    })
   }
 
   openCaptcha() {
@@ -99,25 +97,31 @@ export class CaptchaManagerComponent {
   }
 
   getNextCaptcha() {
-    // TODO make this async
-    this.canContinueService.canSkipCaptcha().subscribe(
-      (canContinue: boolean) => {
-        this.canContinue = canContinue;
-
-        if (!this.canContinue) {
-          if (this.currentCaptchaIndex < this.captchaList.length) {
-            this.currentCaptcha = this.captchaList[++this.currentCaptchaIndex]
-          } else {
-            this.currentCaptchaIndex = 0
-            this.currentCaptcha = this.captchaList[++this.currentCaptchaIndex]
-          }
+    this.checkApiContinue().then(r => {
+      if (!this.canContinue) {
+        if (this.currentCaptchaIndex < this.captchaList.length) {
+          this.currentCaptcha = this.captchaList[this.currentCaptchaIndex]
+          this.currentCaptchaIndex += 1
         } else {
-          this.gotoDownload()
+          this.currentCaptchaIndex = 0
+          this.currentCaptcha = this.captchaList[this.currentCaptchaIndex]
+          this.currentCaptchaIndex += 1
         }
-      })
+      } else {
+        this.gotoDownload()
+      }
+    })
   }
 
   private gotoDownload() {
     this.router.navigate(['download-top-secret-file-which-they-cant-guess-the-uri-for-because-we-are-the-best']);
+  }
+
+  private async checkApiContinue() {
+    this.canContinueService.canSkipCaptcha().subscribe(
+      (canContinue: boolean) => {
+        this.canContinue = canContinue;
+
+      })
   }
 }
