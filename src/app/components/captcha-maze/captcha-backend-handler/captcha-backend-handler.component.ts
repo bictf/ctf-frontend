@@ -69,7 +69,7 @@ export class CaptchaBackendHandlerComponent {
       this.captchaQuestionService.getTextCaptcha().subscribe(
         (result) => {
           for (let question of result){
-            let captchaData = {question: "הזינו את המילה המופיעה בתמונה על מנת להוכיח שאינכם ציוניים", image: question, options: null, correctAnswer: question}
+            let captchaData = {question: "הזינו את המילה המופיעה בתמונה על מנת להוכיח שאינכם ציוניים", image: question.encryptedName, options: null, correctAnswer: question.solution}
             this.captchaList.push(new Captcha(captchaData, OpenQuestionCaptchaComponent))
           }
           resolve()
