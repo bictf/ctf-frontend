@@ -17,7 +17,7 @@ import { SearchFormComponent } from './components/search-form/search-form.compon
 import { AccessDeniedScreenComponent } from './screens/access-denied-screen/access-denied-screen.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { DownloadBinaryFileButtonComponent } from './components/download-binary-file-button/download-binary-file-button.component';
-import { MadeByLableComponent } from './components/made-by-lable/made-by-lable.component';
+import { MadeByLabelComponent } from './components/made-by-label/made-by-lable.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { AnswerPasswordDialogComponent } from './components/answer-password-dialog/answer-password-dialog.component';
 import { LootScreenComponent } from './screens/loot-screen/loot-screen.component';
@@ -49,7 +49,7 @@ const appRoutes: Routes = [
     AccessDeniedScreenComponent,
     AccessDeniedComponent,
     DownloadBinaryFileButtonComponent,
-    MadeByLableComponent,
+    MadeByLabelComponent,
     TimerComponent,
     AnswerPasswordDialogComponent,
     LootScreenComponent,

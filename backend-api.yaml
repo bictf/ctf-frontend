@@ -210,26 +210,26 @@ paths:
                       type: "string"
                     solution:
                       type: string
-#  /captcha/text_captchas/by_name:
-#    get:
-#      tags:
-#        - captcha pictures by name
-#      summary: GET captcha/text_captchas/by_name
-#      operationId: getTextCaptchaByName
-#      parameters:
-#        - name: captchaName
-#          in: query
-#          required: false
-#      responses:
-#        200:
-#          description: OK
-#          content:
-#            'application/json':
-#              schema:
-#                type: array
-#                items:
-#                  type: string
-#                  format: byte
+  /captcha/text_captchas/by_name:
+    get:
+      tags:
+        - captcha pictures by name
+      summary: GET captcha/text_captchas/by_name
+      operationId: getTextCaptcha
+      parameters:
+        - name: captchaName
+          in: query
+          required: false
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
   /search:
     get:
       tags:
@@ -243,6 +243,11 @@ paths:
           required: true
           schema:
             type: string
+        - name: "user"
+          in: "cookie"
+          required: true
+          schema:
+            type: "string"
       responses:
         200:
           description: OK
@@ -250,6 +255,29 @@ paths:
             application/json:
               schema:
                 $ref: #/components/schemas/SearchResponseToUser
+
+  /next_password_level:
+    get:
+      summary: "GET next_password_level"
+      operationId: "getNextPasswordLevel"
+      parameters:
+        - name: "password"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+        - name: "user"
+          in: "cookie"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PasswordGameLevelDto"
 components:
   schemas:
     LoginResponseToUser:
@@ -319,3 +347,13 @@ components:
       required:
         - title
         - content
+    PasswordGameLevelDto:
+      type: "object"
+      properties:
+        description:
+          type: "string"
+        hint:
+          type: "string"
+      required:
+        - "description"
+        - "hint"
