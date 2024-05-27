@@ -51,7 +51,7 @@ export class CaptchaBackendHandlerComponent {
       this.captchaQuestionService.getAllOpenCaptchaQuestions().subscribe(
         (result) => {
           for (let question of result){
-            let captchaData = {question: question.title, image: null, options: null, correctAnswer: question.answer.toString()}
+            let captchaData = {question: question.title, image: question.image, options: null, correctAnswer: question.answer.toString()}
             this.captchaList.push(new Captcha(captchaData, OpenQuestionCaptchaComponent))
           }
           resolve()
@@ -123,20 +123,21 @@ export class CaptchaBackendHandlerComponent {
   // }
 
   getImageGridCaptchas(){
-    return new Promise<void>((resolve, reject) => {
-      this.captchaPictureService.getSomePictures().subscribe(
-        (result) => {
-          for (let image of result) {
-            let captchaData = {question: "סמנו את הריבועים בהם מופיעים מפקדי הצבא הציוני", image: image, options: null, correctAnswer: [0]}
-            this.captchaList.push(new Captcha(captchaData, SingleImageGridCaptchaComponent))
-          }
-          resolve()
-        },
-        (error) => {
-          this.snackBar.open(error.error, '', {duration: 3000, panelClass: 'error-snack-bar'})
-          reject(error)
-        }
-      )
-    })
+    // return new Promise<void>((resolve, reject) => {
+    //   this.captchaPictureService.getSomePictures().subscribe(
+    //     (result) => {
+    //       for (let image of result) {
+    //         let captchaData = {question: "סמנו את הריבועים בהם מופיעים מפקדי הצבא הציוני", image: image, options: null, correctAnswer: [0]}
+    //         this.captchaList.push(new Captcha(captchaData, SingleImageGridCaptchaComponent))
+    //       }
+    //       resolve()
+    //     },
+    //     (error) => {
+    //       this.snackBar.open(error.error, '', {duration: 3000, panelClass: 'error-snack-bar'})
+    //       reject(error)
+    //     }
+    //   )
+    // })
+    return;
   }
 }

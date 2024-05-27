@@ -24,7 +24,7 @@ export class DownloadBinaryFileButtonComponent {
             '_blank'
           );
 
-          setTimeout(() => newTab?.close(), 5);
+          setTimeout(() => newTab?.close(), 5000);
         },
         (error) => {
           let errorMessage = ""
