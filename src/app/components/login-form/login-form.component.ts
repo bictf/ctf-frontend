@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { getUuid } from 'src/app/services/uuidService';
 import { TimerComponent } from '../timer/timer.component';
 import {LoginService} from "../../modules/openapi/services/login.service";
+import { CaptchaButtonComponent } from '../captcha-button/captcha-button.component';
 
 @Component({
   selector: 'app-login-form',

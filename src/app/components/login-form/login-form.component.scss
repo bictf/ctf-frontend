@@ -1,4 +1,4 @@
-.login-form{
+.login-form {
     display: flex;
     flex-direction: column;
     padding: 4%;
@@ -7,12 +7,12 @@
     box-sizing: border-box;
 }
 
-.login-header{
+.login-header {
     font-size: 30px;
     line-height: 100%;
 }
 
-.login-button{
+::ng-deep .login-button {
     max-width: 488px;
     width: -webkit-fill-available;
     height: 52px;
@@ -27,15 +27,15 @@
     letter-spacing: 4px;
 }
 
-.login-button:hover{
+::ng-deep .login-button:hover {
     filter: brightness(85%);
 }
 
-.login-button:active{
+::ng-deep .login-button:active {
     filter: brightness(75%);
 }
 
-.google-login-button{
+::ng-deep .google-login-button {
     max-width: 488px;
     width: -webkit-fill-available;
     height: 52px;
@@ -55,19 +55,20 @@
     gap: 5%;
 }
 
-.google-login-button:hover{
+::ng-deep .google-login-button:hover {
     filter: brightness(85%);
 }
 
-.google-login-button:active{
+::ng-deep .google-login-button:active {
     filter: brightness(75%);
 }
 
-.google-logo{
+::ng-deep .google-logo {
     height: 80%;
 }
 
-.fields-container, .buttons-container{
+.fields-container,
+.buttons-container {
     display: flex;
     flex-direction: column;
     gap: 30px;
