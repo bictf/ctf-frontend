@@ -16,10 +16,10 @@ export class CaptchaHandlerService {
   currentCaptcha?: Captcha;
   // Sleep configuration
   currentSleep = 5;
-  MIN_SLEEP_DURATION : number = 5;
-  MAX_SLEEP_DURATION : number = 60;
+  MIN_SLEEP_DURATION: number = 5;
+  MAX_SLEEP_DURATION: number = 60;
 
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private captchaApi: CaptchaApiService) {}
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private captchaApi: CaptchaApiService) { }
 
   ngOnInit() {
     this.captchaList = this.captchaApi.captchaList;
@@ -27,15 +27,22 @@ export class CaptchaHandlerService {
     this.currentCaptchaIndex += 1
   }
 
-  openCaptcha(onSuccessCallback: Function = ()=>{
+  openCaptcha(onSuccessCallback: Function = () => {
     this.getNextCaptcha()
     this.openCaptcha()
   }) {
     if (this.captchaList.length == 0) {
       this.captchaList = this.captchaApi.captchaList
-      this.currentCaptcha = this.captchaList[0]
-      this.currentCaptchaIndex += 1
+      this.currentCaptchaIndex = 0
+    } else {
+      if (this.currentCaptchaIndex < this.captchaList.length) {
+        this.currentCaptchaIndex += 1
+      } else {
+        this.currentCaptchaIndex = 1
+      }
     }
+    this.currentCaptcha = this.captchaList[this.currentCaptchaIndex]
+
     if (this.currentCaptcha?.captchaComponent) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.autoFocus = true;
@@ -47,7 +54,7 @@ export class CaptchaHandlerService {
       dialogRef.disableClose = true;
 
       dialogRef.afterClosed().subscribe(
-          result => this.handleResult(result, onSuccessCallback)
+        result => this.handleResult(result, onSuccessCallback)
       );
     }
   }
@@ -57,7 +64,7 @@ export class CaptchaHandlerService {
     dialogConfig.autoFocus = true;
     let randomMessageIndex = Math.floor(Math.random() * CaptchaConsts.CORRECT_ANSWER_MESSAGE.length)
     let message = CaptchaConsts.CORRECT_ANSWER_MESSAGE[randomMessageIndex]
-    dialogConfig.data = {message: message, buttonTitle: "המשך", time: 0};
+    dialogConfig.data = { message: message, buttonTitle: "המשך", time: 0 };
 
     this.currentSleep = Math.max(this.MIN_SLEEP_DURATION, this.currentSleep - 10)
 
@@ -73,7 +80,7 @@ export class CaptchaHandlerService {
     dialogConfig.autoFocus = true;
     let randomMessageIndex = Math.floor(Math.random() * CaptchaConsts.WRONG_ANSWER_MESSAGES.length)
     let message = CaptchaConsts.WRONG_ANSWER_MESSAGES[randomMessageIndex]
-    dialogConfig.data = {message: message, buttonTitle: "נסו שוב", time: this.currentSleep};
+    dialogConfig.data = { message: message, buttonTitle: "נסו שוב", time: this.currentSleep };
 
     this.currentSleep = Math.min(this.MAX_SLEEP_DURATION, this.currentSleep + 10)
 
