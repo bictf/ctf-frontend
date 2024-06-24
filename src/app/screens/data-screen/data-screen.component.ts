@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {SearchResponseFromServer} from 'src/app/objects/api/SearchResponseFromServer';
-import {CookieService} from 'ngx-cookie-service';
-import {Router} from '@angular/router';
-import {getUuid} from 'src/app/services/uuidService';
-import {SearchService} from "../../modules/openapi/services/search.service";
-import {LoginService} from "../../modules/openapi/services/login.service";
+import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SearchResponseFromServer } from 'src/app/objects/api/SearchResponseFromServer';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { getUuid } from 'src/app/services/uuidService';
+import { SearchService } from "../../modules/openapi/services/search.service";
+import { LoginService } from "../../modules/openapi/services/login.service";
+import { CaptchaHandlerService } from 'src/app/services/captcha-handler.service';
 
 @Component({
   selector: 'app-data-screen',
@@ -26,9 +27,10 @@ export class DataScreenComponent {
     private loginService: LoginService,
     private cookieService: CookieService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private captchaHandler: CaptchaHandlerService
   ) {
-    loginService.doesUserLoggedIn({uuid: getUuid()}).subscribe(
+    loginService.doesUserLoggedIn({ uuid: getUuid() }).subscribe(
       (result) => (result ? null : this.router.navigate(['/access-denied'])),
       (error) =>
         this.snackBar.open(error.error, '', {
@@ -40,22 +42,26 @@ export class DataScreenComponent {
 
   onSearchPressed(searchText: string): void {
     this.searchText = searchText;
-    this.searchService.search({text: searchText}).subscribe(
-      (result) => this.showSearchResult(<SearchResponseFromServer>result),
-      (error) =>
-        this.snackBar.open(error.error, '', {
-          duration: 3000,
-          panelClass: 'error-snack-bar',
-        })
-    );
+    this.captchaHandler.openCaptcha(() => {
+      this.validateAdminUserAccess()
+
+      this.searchService.search({ text: searchText }).subscribe(
+        (result) => this.showSearchResult(<SearchResponseFromServer>result),
+        (error) =>
+          this.snackBar.open(error.error, '', {
+            duration: 3000,
+            panelClass: 'error-snack-bar',
+          })
+      );
+    })
   }
 
   showSearchResult({
-                     totalResults,
-                     title,
-                     content,
-                     isBinaryFile,
-                   }: SearchResponseFromServer): void {
+    totalResults,
+    title,
+    content,
+    isBinaryFile,
+  }: SearchResponseFromServer): void {
     this.showResultPage = true;
 
     this.totalResults = totalResults;
@@ -75,5 +81,10 @@ export class DataScreenComponent {
         })
       }
     )
+  }
+
+  navigateToPasswordGame() {
+    this.validateAdminUserAccess()
+    this.snackBar.open("Whoops! Password game not yet implemented!")
   }
 }

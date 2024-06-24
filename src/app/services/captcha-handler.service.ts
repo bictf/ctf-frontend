@@ -7,10 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CaptchaApiService } from './captcha-api.service';
 
 /**
- * Currently this service maintains API compatibilty with the CaptchaManager component. 
- * The Optional parameters in the functions below are used to override the default funcitonality expceted from it.
- * Currently the service is not used in place of its predecessor and is currently waiting for approval from our frontend masters.
- * If you decide to remove the API compatibility support, please make sure to remove these heinous adaptations. 
+ * Responsible for opening and creating CAPTCHA dialog boxes.
  */
 @Injectable({
   providedIn: 'root'
@@ -35,13 +32,9 @@ export class CaptchaHandlerService {
 
   /**
    * 
-   * @param onSuccessCallback The functionality to execute after passing the CAPTCHA test. DEafaults to opening more captchas.
-   * @param shouldContinueAfterFailing Whether upon failure of a CAPTCHA, to continue opening more iwndows until success.
+   * @param onSuccessCallback The functionality to execute after passing the CAPTCHA test. Does nothing by default.
    */
-  openCaptcha(onSuccessCallback: Function = () => {
-    this.getNextCaptcha()
-    this.openCaptcha(onSuccessCallback, shouldContinueAfterFailing)
-  }, shouldContinueAfterFailing: boolean = true) {
+  openCaptcha(onSuccessCallback: Function = ()=>{}) {
     if (this.captchaList.length == 0) {
       this.captchaList = this.captchaApi.captchaList
       this.currentCaptchaIndex = 0
@@ -65,7 +58,7 @@ export class CaptchaHandlerService {
       dialogRef.disableClose = true;
 
       dialogRef.afterClosed().subscribe(
-        result => this.handleResult(result, onSuccessCallback, shouldContinueAfterFailing)
+        result => this.handleResult(result, onSuccessCallback)
       );
     }
   }
@@ -86,7 +79,7 @@ export class CaptchaHandlerService {
     )
   }
 
-  openWrongAnswerPopup(shouldContinueAfterFailing: boolean) {
+  openWrongAnswerPopup() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     let randomMessageIndex = Math.floor(Math.random() * CaptchaConsts.WRONG_ANSWER_MESSAGES.length)
@@ -97,16 +90,13 @@ export class CaptchaHandlerService {
 
     const dialogRef = this.dialog.open(CaptchaAnswerPopupComponent, dialogConfig);
     dialogRef.disableClose = true;
-    dialogRef.afterClosed().subscribe(
-      result => { if (shouldContinueAfterFailing) { this.openCaptcha() } }
-    )
   }
 
-  handleResult(result: boolean, onSuccessCallback: Function, shouldContinueAfterFailing: boolean) {
+  handleResult(result: boolean, onSuccessCallback: Function) {
     if (result) {
       this.openCorrectAnswerPopup(onSuccessCallback)
     } else {
-      this.openWrongAnswerPopup(shouldContinueAfterFailing)
+      this.openWrongAnswerPopup()
     }
   }
 
