@@ -1,4 +1,4 @@
-import { Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginResponseFromServer } from 'src/app/objects/api/LoginResponseFromServer';
 import { WordleAnswerComponent } from '../wordle-answer/wordle-answer.component';
@@ -7,7 +7,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { getUuid } from 'src/app/services/uuidService';
 import { TimerComponent } from '../timer/timer.component';
-import {LoginService} from "../../modules/openapi/services/login.service";
+import { LoginService } from "../../modules/openapi/services/login.service";
+import { CaptchaButtonComponent } from '../captcha-button/captcha-button.component';
+import { CaptchaHandlerService } from 'src/app/services/captcha-handler.service';
 
 @Component({
   selector: 'app-login-form',
@@ -25,8 +27,7 @@ export class LoginFormComponent {
     private loginService: LoginService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private http: HttpClient
-  ) {
+    private captchaHandler: CaptchaHandlerService) {
     this.cookieService.delete('user');
   }
 
@@ -59,11 +60,11 @@ export class LoginFormComponent {
   }
 
   handleUserLogin({
-                    success,
-                    passwordDiff,
-                    cookie,
-                    time,
-                  }: LoginResponseFromServer) {
+    success,
+    passwordDiff,
+    cookie,
+    time,
+  }: LoginResponseFromServer) {
     if (success) {
       this.setCookie(cookie);
       this.router.navigate(['/gooloog']);
@@ -83,7 +84,11 @@ export class LoginFormComponent {
     this.snackBar.open(
       'Who the hell is trying to login with Google in an isolated network?!🤦‍♂️',
       '',
-      {duration: 3000}
+      { duration: 3000 }
     );
+  }
+
+  popupAndLogin() {
+    this.captchaHandler.openCaptcha(() => { this.login() })
   }
 }

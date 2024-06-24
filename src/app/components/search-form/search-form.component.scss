@@ -20,7 +20,7 @@
     }
   }
 
-  button {
+  ::ng-deep .search-button {
     background-color: transparent;
     border: none;
     padding: 0;

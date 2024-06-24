@@ -3,15 +3,15 @@
         Login to your Account
     </div>
     <div class="fields-container">
-        <app-input-field (valueChange)="this.username = $event" label="Username" (keyup.enter)="this.login()"></app-input-field>
-        <app-input-field (valueChange)="this.password = $event" label="Password" (keyup.enter)="this.login()"></app-input-field>
+        <app-input-field (valueChange)="this.username = $event" label="Username" (keyup.enter)="popupAndLogin()"></app-input-field>
+        <app-input-field (valueChange)="this.password = $event" label="Password" (keyup.enter)="popupAndLogin()"></app-input-field>
     </div>
     <div class="buttons-container">
-        <button class="login-button" (click)="this.login()">LOGIN</button>
-        <button class="google-login-button" (click)="this.loginWithGoogle()">
+        <app-captcha-button innerButtonClass="login-button" (clickedEvent)="login()">LOGIN</app-captcha-button>
+        <app-captcha-button innerButtonClass="google-login-button" (clickedEvent)="loginWithGoogle()">
             <img class="google-logo" src="/assets/google-logo.png">
             Continue with Google
-        </button>
+        </app-captcha-button>
     </div>
 
     <app-timer #timer></app-timer>
