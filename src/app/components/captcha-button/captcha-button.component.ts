@@ -16,6 +16,6 @@ export class CaptchaButtonComponent {
   }
 
   raiseCaptcha() {
-    this.captchaHandler.openCaptcha(() => { this.clickedEvent.emit() }, false)
+    this.captchaHandler.openCaptcha(() => { this.clickedEvent.emit() })
   }
 }
