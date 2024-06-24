@@ -10,5 +10,5 @@ import { PreviousRulesComponent } from '../previous-rules/previous-rules.compone
   styleUrl: './password-game.component.scss'
 })
 export class PasswordGameComponent {
-
+  // TODO: get all rules and generate components, redo on every password input
 }
