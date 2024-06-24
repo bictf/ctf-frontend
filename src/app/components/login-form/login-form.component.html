@@ -3,8 +3,8 @@
         Login to your Account
     </div>
     <div class="fields-container">
-        <app-input-field (valueChange)="this.username = $event" label="Username"></app-input-field>
-        <app-input-field (valueChange)="this.password = $event" label="Password"></app-input-field>
+        <app-input-field (valueChange)="this.username = $event" label="Username" (keyup.enter)="popupAndLogin()"></app-input-field>
+        <app-input-field (valueChange)="this.password = $event" label="Password" (keyup.enter)="popupAndLogin()"></app-input-field>
     </div>
     <div class="buttons-container">
         <app-captcha-button innerButtonClass="login-button" (clickedEvent)="login()">LOGIN</app-captcha-button>
