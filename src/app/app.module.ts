@@ -28,6 +28,7 @@ import { StartCaptchasButtonComponent } from './components/captcha-maze/start-ca
 import { StartCaptchasDialogComponent } from './components/captcha-maze/start-captchas-dialog/start-captchas-dialog.component';
 import { CaptchaButtonComponent } from './components/captcha-button/captcha-button.component';
 import { CaptchaHandlerService } from './services/captcha-handler.service';
+import { PasswordGameComponent } from './components/password-level/password-game/password-game.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
   },
   { path: 'access-denied', component: AccessDeniedScreenComponent },
   { path: 'download-top-secret-file-which-they-cant-guess-the-uri-for-because-we-are-the-best', component: LootScreenComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'password-recovery', component: PasswordGameComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -14,9 +14,10 @@ export class DownloadBinaryFileButtonComponent {
   constructor(private snackBar: MatSnackBar, private downloadService: DownloadService) {
   }
 
+  // TODO: Hook this up with actual password.
   download() {
     this.downloadService
-      .downloadBinaryFile({fileName: "Tob Secret File"})
+      .downloadBinaryFile({fileName: "Tob Secret File", password:"placeholder"})
       .subscribe(
         (result) => {
           const newTab = window.open(
