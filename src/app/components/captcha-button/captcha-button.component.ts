@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { CaptchaHandlerService } from 'src/app/services/captcha-handler.service';
 
 @Component({
@@ -12,10 +13,17 @@ export class CaptchaButtonComponent {
   @Output() clickedEvent = new EventEmitter<void>();
   @Input() innerButtonClass: String = "";
 
-  constructor(private captchaHandler: CaptchaHandlerService) {
+  constructor(private captchaHandler: CaptchaHandlerService, private cookieService: CookieService) {
   }
 
   raiseCaptcha() {
-    this.captchaHandler.openCaptcha(() => { this.clickedEvent.emit() })
+    if (this.cookieService.get("captcha") == "false") {
+      this.captchaHandler.openCaptcha(() => {
+        this.cookieService.set("captcha", "true")
+        this.clickedEvent.emit()
+      })
+    } else {
+      this.clickedEvent.emit()
+    }
   }
 }
