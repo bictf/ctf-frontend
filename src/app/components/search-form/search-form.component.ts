@@ -6,6 +6,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./search-form.component.scss']
 })
 export class SearchFormComponent {
+  onKeyUp() {
+    (document.getElementById("searchButton")?.children[0] as HTMLElement).click()
+  }
   searchText: string = "";
   @Output() searchEvent = new EventEmitter<string>();
 

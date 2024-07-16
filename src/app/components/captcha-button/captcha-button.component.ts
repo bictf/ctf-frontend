@@ -11,15 +11,23 @@ import { CaptchaHandlerService } from 'src/app/services/captcha-handler.service'
 })
 export class CaptchaButtonComponent {
   @Output() clickedEvent = new EventEmitter<void>();
-  @Input() innerButtonClass: String = "";
+  @Input() innerButtonClass: string = "";
+  @Input()
+  pageName!: string;
 
   constructor(private captchaHandler: CaptchaHandlerService, private cookieService: CookieService) {
   }
 
+  ngOnInit() {
+    if (!this.cookieService.check(this.pageName)) {
+      this.cookieService.set(this.pageName, "false")
+    }
+  }
+
   raiseCaptcha() {
-    if (this.cookieService.get("captcha") == "false") {
+    if (this.cookieService.get(this.pageName) == "false") {
       this.captchaHandler.openCaptcha(() => {
-        this.cookieService.set("captcha", "true")
+        this.cookieService.set(this.pageName, "true")
         this.clickedEvent.emit()
       })
     } else {
