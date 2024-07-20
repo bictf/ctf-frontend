@@ -16,5 +16,5 @@ import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/m
 export class RuleBoxComponent {
   @Input() isCorrect: boolean = false
   @Input() index?: number
-  @Input() rule?: String
+  @Input() rule?: string
 }

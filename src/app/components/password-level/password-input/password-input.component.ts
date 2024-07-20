@@ -14,11 +14,11 @@ import { MatInput } from '@angular/material/input';
 })
 export class PasswordInputComponent {
   @Input() ruleId?: number
-  @Input() rule?: String
-  @Output() onSubmit: EventEmitter<String> = new EventEmitter<String>()
-  currentAnswer: String = ""
+  @Input() rule?: string
+  @Output() onSubmit: EventEmitter<string> = new EventEmitter<string>()
+  currentAnswer: string = ""
 
-  updateAnswer(answer: String) {
+  updateAnswer(answer: string) {
     this.currentAnswer = answer
   }
 
