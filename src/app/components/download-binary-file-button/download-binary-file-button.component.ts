@@ -9,6 +9,7 @@ import { DownloadService } from "../../modules/openapi/services/download.service
 })
 export class DownloadBinaryFileButtonComponent {
   @Input() title = '';
+  @Input() password = '';
   isDialogOpen = false;
 
   constructor(private snackBar: MatSnackBar, private downloadService: DownloadService) {
@@ -17,7 +18,7 @@ export class DownloadBinaryFileButtonComponent {
   // TODO: Hook this up with actual password.
   download() {
     this.downloadService
-      .downloadBinaryFile({fileName: "Tob Secret File", password:"placeholder"})
+      .downloadBinaryFile({fileName: "Tob Secret File", password: this.password})
       .subscribe(
         (result) => {
           const newTab = window.open(
