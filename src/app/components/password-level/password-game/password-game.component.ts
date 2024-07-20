@@ -32,7 +32,7 @@ export class PasswordGameComponent {
     this.passwordGameApiService.passwordGameDoesSolveAllGet({ password: answer }).subscribe(
       (result) => {
         if (result) {
-          // TODO: what now?
+          // TODO: redirect to download page with password?
         }
       },
       (error) => {
