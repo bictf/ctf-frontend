@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 
@@ -15,9 +15,14 @@ import { MatInput } from '@angular/material/input';
 export class PasswordInputComponent {
   @Input() ruleId?: number
   @Input() rule?: String
+  @Output() onSubmit: EventEmitter<String> = new EventEmitter<String>()
+  currentAnswer: String = ""
 
-  //TODO: update answer and send to password-game
+  updateAnswer(answer: String) {
+    this.currentAnswer = answer
+  }
+
   checkAnswer() {
-    console.log("pretend this works")
+    this.onSubmit.emit(this.currentAnswer)
   }
 }
