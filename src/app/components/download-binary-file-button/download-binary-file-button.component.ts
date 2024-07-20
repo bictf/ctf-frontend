@@ -16,7 +16,7 @@ export class DownloadBinaryFileButtonComponent {
 
   download() {
     this.downloadService
-      .downloadBinaryFile({fileName: "Tob Secret File"})
+      .downloadBinaryFile({fileName: "Tob Secret File", password: "TODO: FIX THIS!"})
       .subscribe(
         (result) => {
           const newTab = window.open(
