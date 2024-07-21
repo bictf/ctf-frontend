@@ -42,7 +42,6 @@ export class DataScreenComponent {
 
   onSearchPressed(searchText: string): void {
     this.searchText = searchText;
-  
     this.searchService.search({ text: searchText }).subscribe(
       (result) => this.showSearchResult(<SearchResponseFromServer>result),
       (error) =>
@@ -82,6 +81,6 @@ export class DataScreenComponent {
 
   navigateToPasswordGame() {
     this.validateAdminUserAccess()
-    this.snackBar.open("Whoops! Password game not yet implemented!")
+    this.router.navigateByUrl("password-level")
   }
 }
