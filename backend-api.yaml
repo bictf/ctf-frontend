@@ -263,6 +263,10 @@ paths:
 
   /password_game/solve:
     get:
+      tags:
+        - password game
+      summary: Return rules password answers for
+      operationId: solve
       parameters:
         - name: password
           required: true
@@ -291,6 +295,10 @@ paths:
 
   /password_game/does_solve_all:
     get:
+      tags:
+        - password game
+      summary: Return whether all rules were answered
+      operationId: doesSolveAll
       parameters:
         - name: password
           required: true
@@ -380,6 +388,7 @@ components:
         - title
         - content
     PasswordGameLevel:
+      tags: password level rule
       type: object
       properties:
         description:

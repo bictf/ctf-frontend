@@ -1,3 +1,3 @@
 <div *ngFor="let rule of allRules">
-    <app-rule-box [index]="allRules?.indexOf(rule)" [rule]="rule!.rule" [isCorrect]="rule.verified!"></app-rule-box>
+    <app-rule-box [index]="allRules?.indexOf(rule)" [rule]="rule!.description" [isCorrect]="rule.isCorrect!"></app-rule-box>
 </div>

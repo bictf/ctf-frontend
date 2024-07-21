@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { PasswordInputComponent } from '../password-input/password-input.component';
 import { PreviousRulesComponent } from '../previous-rules/previous-rules.component';
-import { ApiService } from 'src/app/modules/openapi/services';
+import { PasswordGameService } from 'src/app/modules/openapi/services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DownloadFilePopupComponent } from '../download-file-popup/download-file-popup.component';
+import { PasswordGameLevel } from 'src/app/modules/openapi/models';
 
 @Component({
   selector: 'app-password-game',
@@ -14,31 +15,33 @@ import { DownloadFilePopupComponent } from '../download-file-popup/download-file
   styleUrl: './password-game.component.scss'
 })
 export class PasswordGameComponent {
-  currentRules: any[] = []
+  currentRules: Array<PasswordGameLevel> = []
+  currentRuleId = 0
 
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private passwordGameApiService: ApiService){
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private passwordGameApiService: PasswordGameService) {
     this.checkAnswer("")
   }
 
-  checkAnswer(answer: string){
-    this.passwordGameApiService.passwordGameSolveGet({ password: answer, levels: this.currentRules.length }).subscribe(
+  checkAnswer(answer: string) {
+    this.passwordGameApiService.solve({ password: answer, levels: this.currentRules.length }).subscribe(
       (result) => {
         this.currentRules = result
+        this.currentRuleId = result.length
         // TODO: make sure this regenerates screen
       },
       (error) => {
-        this.snackBar.open(error.error, '', {duration: 3000, panelClass: 'error-snack-bar'})
+        this.snackBar.open(error.error, '', { duration: 3000, panelClass: 'error-snack-bar' })
       }
     )
 
-    this.passwordGameApiService.passwordGameDoesSolveAllGet({ password: answer }).subscribe(
+    this.passwordGameApiService.doesSolveAll({ password: answer }).subscribe(
       (result) => {
         if (result) {
           this.openDownloadFilePopup(answer)
         }
       },
       (error) => {
-        this.snackBar.open(error.error, '', {duration: 3000, panelClass: 'error-snack-bar'})
+        this.snackBar.open(error.error, '', { duration: 3000, panelClass: 'error-snack-bar' })
       }
     )
   }
@@ -46,7 +49,7 @@ export class PasswordGameComponent {
   openDownloadFilePopup(answer: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {password: answer};
+    dialogConfig.data = { password: answer };
 
     const dialogRef = this.dialog.open(DownloadFilePopupComponent, dialogConfig);
     dialogRef.disableClose = true;
