@@ -42,16 +42,14 @@ export class DataScreenComponent {
 
   onSearchPressed(searchText: string): void {
     this.searchText = searchText;
-    this.captchaHandler.openCaptcha(() => {
-      this.searchService.search({ text: searchText }).subscribe(
-        (result) => this.showSearchResult(<SearchResponseFromServer>result),
-        (error) =>
-          this.snackBar.open(error.error, '', {
-            duration: 3000,
-            panelClass: 'error-snack-bar',
-          })
-      );
-    })
+    this.searchService.search({ text: searchText }).subscribe(
+      (result) => this.showSearchResult(<SearchResponseFromServer>result),
+      (error) =>
+        this.snackBar.open(error.error, '', {
+          duration: 3000,
+          panelClass: 'error-snack-bar',
+        })
+    );
   }
 
   showSearchResult({

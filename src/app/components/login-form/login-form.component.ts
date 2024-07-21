@@ -35,6 +35,10 @@ export class LoginFormComponent {
     this.cookieService.set('user', cookie);
   }
 
+  ngOnInit() {
+    this.cookieService.set("captcha", "false")
+  }
+
   login() {
     if (this.password.length == 0) {
       this.snackBar.open("Password cannot be empty!", '', {
@@ -87,8 +91,7 @@ export class LoginFormComponent {
       { duration: 3000 }
     );
   }
-
-  popupAndLogin() {
-    this.captchaHandler.openCaptcha(() => { this.login() })
+  onKeyUp(){
+    (document.getElementById("loginButton")?.children[0] as HTMLElement)?.click()
   }
 }
