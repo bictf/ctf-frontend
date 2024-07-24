@@ -10,7 +10,7 @@ import { MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MAT
   styleUrl: './download-file-popup.component.scss'
 })
 export class DownloadFilePopupComponent {
-  password = ""
+  @Input() password = ""
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {password: string}) {
     this.password = data.password
