@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatButton } from "@angular/material/button";
-import { MatInput } from "@angular/material/input";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatButton} from "@angular/material/button";
+import {MatInput} from "@angular/material/input";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MatOption, MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'app-password-input',
@@ -10,22 +12,32 @@ import { MatInput } from "@angular/material/input";
     MatFormField,
     MatLabel,
     MatButton,
-    MatInput
+    MatInput,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelect,
+    MatOption
   ],
   templateUrl: './password-input.component.html',
-  styleUrl: './password-input.component.scss'
+  styleUrl: './password-input.component.scss',
 })
 export class PasswordInputComponent {
   @Input() ruleId?: number
   @Input() rule?: string
   @Output() onSubmit: EventEmitter<string> = new EventEmitter<string>()
-  currentAnswer: string = ""
+  public passwordForm: FormGroup;
 
-  updateAnswer(answer: string) {
-    this.currentAnswer = answer
+  constructor(formBuilder: FormBuilder) {
+    this.passwordForm = formBuilder.group({
+      password: ['', Validators.required]
+    })
+  }
+
+  getPassword() {
+    return this.passwordForm.get('password')?.value as string
   }
 
   checkAnswer() {
-    this.onSubmit.emit(this.currentAnswer)
+    this.onSubmit.emit(this.getPassword())
   }
 }
