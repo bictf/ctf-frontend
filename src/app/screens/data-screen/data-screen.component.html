@@ -18,7 +18,7 @@
         <div class="content" *ngIf="!isBinaryFile">{{content}}</div>
         <div class="admin-file-content" *ngIf="isBinaryFile">
           <app-access-denied></app-access-denied>
-          <app-captcha-button innerButtonClass="download-button" (clickedEvent)="navigateToPasswordGame()" pageName="search">Download File</app-captcha-button>
+          <button class="download-button" (click)="navigateToPasswordGame()">Download File</button>
         </div>
         <div class="result-count">{{"1 result out of " + totalResults}}</div>
       </div>
