@@ -287,7 +287,7 @@ paths:
         200:
           description: OK
           content:
-            application/json:
+            'application/json':
               schema:
                 type: array
                 items:
@@ -395,3 +395,6 @@ components:
           type: string
         isCorrect:
           type: boolean
+      required:
+        - description
+        - isCorrect
