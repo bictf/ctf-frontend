@@ -28,19 +28,18 @@ import { StartCaptchasButtonComponent } from './components/captcha-maze/start-ca
 import { StartCaptchasDialogComponent } from './components/captcha-maze/start-captchas-dialog/start-captchas-dialog.component';
 import { CaptchaButtonComponent } from './components/captcha-button/captcha-button.component';
 import { CaptchaHandlerService } from './services/captcha-handler.service';
-import { PasswordGameComponent } from './components/password-level/password-game/password-game.component';
+import { PasswordGameScreenComponent } from './screens/password-game-screen/password-game-screen.component';
 
 const appRoutes: Routes = [
   { path: 'gooloog', component: DataScreenComponent },
   { path: 'login', component: LoginScreenComponent },
   {
-    path: 'captcha-level',
-    component: CaptchaBackendHandlerComponent,
+    path: 'admin-password-recovery',
+    component: PasswordGameScreenComponent
   },
   { path: 'access-denied', component: AccessDeniedScreenComponent },
   { path: 'download-top-secret-file-which-they-cant-guess-the-uri-for-because-we-are-the-best', component: LootScreenComponent },
-  { path: 'password-recovery', component: PasswordGameComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
