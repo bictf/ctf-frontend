@@ -5,7 +5,7 @@ import { MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MAT
 @Component({
   selector: 'app-download-file-popup',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, DownloadFilePopupComponent],
+  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
   templateUrl: './download-file-popup.component.html',
   styleUrl: './download-file-popup.component.scss'
 })

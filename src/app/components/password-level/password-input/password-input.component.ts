@@ -1,13 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import { MatButton } from "@angular/material/button";
+import { MatInput } from "@angular/material/input";
 
 @Component({
   selector: 'app-password-input',
   standalone: true,
   imports: [
     MatFormField,
-    MatLabel
+    MatLabel,
+    MatButton,
+    MatInput
   ],
   templateUrl: './password-input.component.html',
   styleUrl: './password-input.component.scss'
