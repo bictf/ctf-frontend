@@ -1,4 +1,5 @@
 export enum Screen {
   Login = '/login',
-  BigData = '/gooloog'
+  BigData = '/gooloog',
+  PasswordGame = '/admin-password-recovery'
 }

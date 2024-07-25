@@ -1,5 +1,6 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card'
+import { NgClass } from "@angular/common";
 
 @Component({
   selector: 'app-rule-box',
@@ -8,7 +9,8 @@ import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/m
     MatCard,
     MatCardHeader,
     MatCardTitle,
-    MatCardContent
+    MatCardContent,
+    NgClass
   ],
   templateUrl: './rule-box.component.html',
   styleUrl: './rule-box.component.scss'

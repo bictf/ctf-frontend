@@ -1,8 +1,8 @@
-<mat-card *ngClass="isCorrect ? 'correctCard' : 'wrongCard'" appearance="outlined">
-    <mat-card-header *ngClass="isCorrect ? 'correctHeader' : 'wrongHeader'">
-      <mat-card-title>Rule {{index}}</mat-card-title>
+<mat-card [ngClass]="isCorrect ? 'correctCard' : 'wrongCard'" appearance="outlined">
+    <mat-card-header [ngClass]="isCorrect ? 'correctHeader' : 'wrongHeader'">
+      #{{index}}
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="card-content">
       <p>{{rule}}</p>
     </mat-card-content>
 </mat-card>
