@@ -99,12 +99,11 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            'application/zip':
               schema:
-                type: array
-                items:
-                  type: string
-                  format: byte
+                type: string
+                format: binary
+
   /captcha/cG9zdCBoZXJlIHRvIGZsaXAgd2hldGhlciB0aGUgY2FwdGNoYSBzaG91bGQgcGFzcyBvciBub3Q:
     post:
       tags:

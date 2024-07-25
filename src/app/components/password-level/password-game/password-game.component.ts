@@ -2,8 +2,7 @@ import {Component} from '@angular/core';
 import {PasswordInputComponent} from '../password-input/password-input.component';
 import {PasswordGameService} from 'src/app/modules/openapi/services';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {DownloadFilePopupComponent} from '../download-file-popup/download-file-popup.component';
+import {MatDialog} from '@angular/material/dialog';
 import {NgForOf} from "@angular/common";
 import {RuleBoxComponent} from "../rule-box/rule-box.component";
 import {PasswordLevelData} from "../PasswordLevelData";
@@ -19,6 +18,7 @@ export class PasswordGameComponent {
   // TODO Sort this by failed first
   currentRules: Array<PasswordLevelData> = []
   currentRuleId = 0
+  buttonText: string = "SUBMIT";
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private passwordGameApiService: PasswordGameService) {
     this.checkAnswer("")
@@ -48,16 +48,6 @@ export class PasswordGameComponent {
     // TODO: make sure this regenerates screen
   }
 
-  openDownloadFilePopup(answer: string) {
-    //  TODO cuases the whole thing to crash when youve reached the end, need to fix that
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {password: answer};
-
-    const dialogRef = this.dialog.open(DownloadFilePopupComponent, dialogConfig);
-    dialogRef.disableClose = true;
-  }
-
   getIdentity(index: number) {
     return index
   }
@@ -66,7 +56,7 @@ export class PasswordGameComponent {
     this.passwordGameApiService.doesSolveAll({password: answer}).subscribe(
       (result) => {
         if (result) {
-          this.openDownloadFilePopup(answer)
+          this.buttonText = "DOWNLOAD!!!!!!!!!"
         } else {
           this.checkAnswer(answer)
         }

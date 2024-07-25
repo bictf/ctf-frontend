@@ -4,6 +4,7 @@ import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatOption, MatSelect} from "@angular/material/select";
+import {DownloadFileButtonComponent} from "../download-file-button/download-file-button.component";
 
 @Component({
   selector: 'app-password-input',
@@ -16,7 +17,8 @@ import {MatOption, MatSelect} from "@angular/material/select";
     FormsModule,
     ReactiveFormsModule,
     MatSelect,
-    MatOption
+    MatOption,
+    DownloadFileButtonComponent
   ],
   templateUrl: './password-input.component.html',
   styleUrl: './password-input.component.scss',
@@ -26,6 +28,7 @@ export class PasswordInputComponent {
   @Input() rule?: string
   @Output() onSubmit: EventEmitter<string> = new EventEmitter<string>()
   public passwordForm: FormGroup;
+  @Input() buttonText!: string;
 
   constructor(formBuilder: FormBuilder) {
     this.passwordForm = formBuilder.group({
