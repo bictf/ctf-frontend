@@ -34,32 +34,22 @@ export class PasswordGameComponent {
           return new PasswordLevelData(item.description, item.isCorrect)
         }) as PasswordLevelData[]
         this.currentRuleId = result.length
+
         if (this.currentRules.every((it) => {
           return it.isCorrect
         })) {
-          //  TODO cuases the whole thing to crash when youve reached the end, need to fix that
-          this.passwordGameApiService.doesSolveAll({ password: answer }).subscribe(
-            (result) => {
-              if (result) {
-                this.openDownloadFilePopup(answer)
-              } else {
-                this.checkAnswer(answer)
-              }
-            },
-            (error) => {
-              this.snackBar.open(error.error, '', { duration: 3000, panelClass: 'error-snack-bar' })
-            }
-          )
+          this.checkIfFinished(answer)
         }
-        // TODO: make sure this regenerates screen
       },
       (error) => {
         this.snackBar.open(error.error, '', {duration: 3000, panelClass: 'error-snack-bar'})
       }
     )
+    // TODO: make sure this regenerates screen
   }
 
   openDownloadFilePopup(answer: string) {
+    //  TODO cuases the whole thing to crash when youve reached the end, need to fix that
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.data = {password: answer};
@@ -70,5 +60,20 @@ export class PasswordGameComponent {
 
   getIdentity(index: number) {
     return index
+  }
+
+  private checkIfFinished(answer: string) {
+    this.passwordGameApiService.doesSolveAll({password: answer}).subscribe(
+      (result) => {
+        if (result) {
+          this.openDownloadFilePopup(answer)
+        } else {
+          this.checkAnswer(answer)
+        }
+      },
+      (error) => {
+        this.snackBar.open(error.error, '', {duration: 3000, panelClass: 'error-snack-bar'})
+      }
+    )
   }
 }
