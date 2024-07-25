@@ -16,6 +16,7 @@ import {PasswordLevelData} from "../PasswordLevelData";
   styleUrl: './password-game.component.scss'
 })
 export class PasswordGameComponent {
+  // TODO Sort this by failed first
   currentRules: Array<PasswordLevelData> = []
   currentRuleId = 0
 
