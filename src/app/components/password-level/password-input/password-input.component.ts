@@ -4,7 +4,6 @@ import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatOption, MatSelect} from "@angular/material/select";
-import {DownloadFileButtonComponent} from "../download-file-button/download-file-button.component";
 
 @Component({
   selector: 'app-password-input',
@@ -18,7 +17,6 @@ import {DownloadFileButtonComponent} from "../download-file-button/download-file
     ReactiveFormsModule,
     MatSelect,
     MatOption,
-    DownloadFileButtonComponent
   ],
   templateUrl: './password-input.component.html',
   styleUrl: './password-input.component.scss',
