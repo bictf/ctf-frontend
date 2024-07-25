@@ -20,7 +20,6 @@ import { DownloadBinaryFileButtonComponent } from './components/download-binary-
 import { MadeByLabelComponent } from './components/made-by-label/made-by-lable.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { AnswerPasswordDialogComponent } from './components/answer-password-dialog/answer-password-dialog.component';
-import { LootScreenComponent } from './screens/loot-screen/loot-screen.component';
 import { CaptchaManagerComponent } from './components/captcha-maze/captcha-manager/captcha-manager.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CaptchaBackendHandlerComponent } from './components/captcha-maze/captcha-backend-handler/captcha-backend-handler.component';
@@ -38,7 +37,6 @@ const appRoutes: Routes = [
     component: PasswordGameScreenComponent
   },
   { path: 'access-denied', component: AccessDeniedScreenComponent },
-  { path: 'download-top-secret-file-which-they-cant-guess-the-uri-for-because-we-are-the-best', component: LootScreenComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -55,7 +53,6 @@ const appRoutes: Routes = [
         MadeByLabelComponent,
         TimerComponent,
         AnswerPasswordDialogComponent,
-        LootScreenComponent,
         LoginFormComponent,
         DataScreenComponent,
         CaptchaManagerComponent,
