@@ -62,21 +62,21 @@ export class DataScreenComponent {
     this.isBinaryFile = isBinaryFile;
   }
 
-  validateAdminUserAccess() {
-    this.loginService.isAdminUser().subscribe(
-      (result) => (result ? null : this.router.navigate(['/access-denied'])),
-      (_) => {
-        this.router.navigate(['/access-denied'])
-        this.snackBar.open("Only admin users can download secret files!", '', {
-          duration: 3000,
-          panelClass: 'error-snack-bar',
-        })
-      }
-    )
-  }
-
+  /**
+  * If the user is an admin - navigates to password game.
+  * Otherwise - navigates to access denied page.
+  */
   navigateToPasswordGame() {
-    this.validateAdminUserAccess()
-    this.router.navigateByUrl("admin-password-recovery")
+    this.loginService.isAdminUser().subscribe(
+          (result) => (result ? this.router.navigateByUrl("admin-password-recovery") : this.router.navigateByUrl("access-denied")),
+          (_) => {
+            this.router.navigate(['/access-denied'])
+            this.snackBar.open("Only admin users can download secret files!", '', {
+              duration: 3000,
+              panelClass: 'error-snack-bar',
+            })
+          }
+        )
+
   }
 }
