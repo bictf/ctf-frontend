@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SearchResponseFromServer } from 'src/app/objects/api/SearchResponseFromServer';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { getUuid } from 'src/app/services/uuidService';
 import { SearchService } from "../../modules/openapi/services/search.service";
 import { LoginService } from "../../modules/openapi/services/login.service";
-import { CaptchaHandlerService } from 'src/app/services/captcha-handler.service';
 
 @Component({
   selector: 'app-data-screen',
@@ -25,10 +23,8 @@ export class DataScreenComponent {
   constructor(
     private searchService: SearchService,
     private loginService: LoginService,
-    private cookieService: CookieService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private captchaHandler: CaptchaHandlerService
   ) {
     loginService.doesUserLoggedIn({ uuid: getUuid() }).subscribe(
       (result) => (result ? null : this.router.navigate(['/access-denied'])),
@@ -66,21 +62,21 @@ export class DataScreenComponent {
     this.isBinaryFile = isBinaryFile;
   }
 
-  validateAdminUserAccess() {
-    this.loginService.isAdminUser().subscribe(
-      (result) => (result ? null : this.router.navigate(['/access-denied'])),
-      (error) => {
-        this.router.navigate(['/access-denied'])
-        this.snackBar.open("Only admin users can download secret files!", '', {
-          duration: 3000,
-          panelClass: 'error-snack-bar',
-        })
-      }
-    )
-  }
-
+  /**
+  * If the user is an admin - navigates to password game.
+  * Otherwise - navigates to access denied page.
+  */
   navigateToPasswordGame() {
-    this.validateAdminUserAccess()
-    this.router.navigateByUrl("password-level")
+    this.loginService.isAdminUser().subscribe(
+          (result) => (result ? this.router.navigateByUrl("admin-password-recovery") : this.router.navigateByUrl("access-denied")),
+          (_) => {
+            this.router.navigate(['/access-denied'])
+            this.snackBar.open("Only admin users can download secret files!", '', {
+              duration: 3000,
+              panelClass: 'error-snack-bar',
+            })
+          }
+        )
+
   }
 }

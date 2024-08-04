@@ -99,12 +99,11 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            'application/zip':
               schema:
-                type: array
-                items:
-                  type: string
-                  format: byte
+                type: string
+                format: binary
+
   /captcha/cG9zdCBoZXJlIHRvIGZsaXAgd2hldGhlciB0aGUgY2FwdGNoYSBzaG91bGQgcGFzcyBvciBub3Q:
     post:
       tags:
@@ -263,6 +262,10 @@ paths:
 
   /password_game/solve:
     get:
+      tags:
+        - password game
+      summary: Return rules password answers for
+      operationId: solve
       parameters:
         - name: password
           required: true
@@ -283,7 +286,7 @@ paths:
         200:
           description: OK
           content:
-            application/json:
+            'application/json':
               schema:
                 type: array
                 items:
@@ -291,6 +294,10 @@ paths:
 
   /password_game/does_solve_all:
     get:
+      tags:
+        - password game
+      summary: Return whether all rules were answered
+      operationId: doesSolveAll
       parameters:
         - name: password
           required: true
@@ -380,9 +387,13 @@ components:
         - title
         - content
     PasswordGameLevel:
+      tags: password level rule
       type: object
       properties:
         description:
           type: string
         isCorrect:
           type: boolean
+      required:
+        - description
+        - isCorrect
