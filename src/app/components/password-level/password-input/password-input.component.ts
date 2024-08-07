@@ -58,8 +58,15 @@ export class PasswordInputComponent {
 
     Swal.fire({
       title: 'Who started the fire!?\n🔥🔥🔥',
-      confirmButtonText: "We didn't start the fire!"
-    })
+      confirmButtonText: "We didn't start the fire!",
+      icon: 'warning',
+      iconHtml: '<img src="../../../../assets/elmo-burning.gif">',
+      customClass: {
+        popup: 'burning-popup',
+        title: 'burning-title',
+        confirmButton: 'burning-confirm-button',
+      }
+    });
   }
 
   private burnPassword() {
