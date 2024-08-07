@@ -4,6 +4,7 @@ import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatOption, MatSelect} from "@angular/material/select";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-password-input',
@@ -41,7 +42,7 @@ export class PasswordInputComponent {
     return this.passwordForm.get('password')?.value as string
   }
 
-  setPassword(newPassword: string) {
+  private setPassword(newPassword: string) {
     for (const char of newPassword) {
 
     }
@@ -52,7 +53,16 @@ export class PasswordInputComponent {
     this.onSubmit.emit(this.getPassword())
   }
 
-  burnPassword() {
+  burnPasswordAndIndicate() {
+    this.burnPassword()
+
+    Swal.fire({
+      title: 'Who started the fire!?\n🔥🔥🔥',
+      confirmButtonText: "We didn't start the fire!"
+    })
+  }
+
+  private burnPassword() {
     this.initiatePasswordFire()
 
     let fireSpreadInterval = setInterval(() => {
@@ -64,7 +74,7 @@ export class PasswordInputComponent {
     }, this.FIRE_SPREAD_INTERVAL_IN_MS)
   }
 
-  initiatePasswordFire() {
+  private initiatePasswordFire() {
     let firePassword = this.getPassword()
 
     let fireEndIndex = Math.round((Math.random() * firePassword.length) + 1)
@@ -72,14 +82,14 @@ export class PasswordInputComponent {
     this.setPassword(firePassword);
   }
 
-  spreadFireInPassword() {
+  private spreadFireInPassword() {
     let firePassword = this.getPassword();
 
     firePassword = this.spreadFireIfLit(firePassword);
     this.setPassword(firePassword);
   }
 
-  spreadFireIfLit(burningText: string): string {
+  private spreadFireIfLit(burningText: string): string {
     if (this.isOnFire(burningText)) {
       let firstFireIndex: number = burningText.indexOf(this.FIRE_EMOJI);
       let lastFireIndex: number = burningText.lastIndexOf(this.FIRE_EMOJI);
@@ -93,7 +103,7 @@ export class PasswordInputComponent {
     return burningText;
   }
 
-  isOnFire(text: string): boolean {
+  private isOnFire(text: string): boolean {
     return text.includes(this.FIRE_EMOJI);
   }
 }

@@ -1,10 +1,10 @@
-import { Component } from '@angular/core'
-import { PasswordInputComponent } from '../password-input/password-input.component'
-import { DownloadService , PasswordGameService } from 'src/app/modules/openapi/services'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { NgForOf } from "@angular/common"
-import { RuleBoxComponent } from "../rule-box/rule-box.component"
-import { PasswordLevelData } from "../PasswordLevelData"
+import {Component, ViewChild} from '@angular/core'
+import {PasswordInputComponent} from '../password-input/password-input.component'
+import {DownloadService, PasswordGameService} from 'src/app/modules/openapi/services'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {NgForOf} from "@angular/common"
+import {RuleBoxComponent} from "../rule-box/rule-box.component"
+import {PasswordLevelData} from "../PasswordLevelData"
 
 @Component({
   selector: 'app-password-game',
@@ -17,13 +17,18 @@ export class PasswordGameComponent {
   private readonly SUBMIT_TEXT = "SUBMIT"
   private readonly DOWNLOAD_TEXT = "DOWNLOAD!!!!!!!!!"
   protected readonly Array = Array
+  private readonly LEVELS_BEFORE_FIRE_INDEXES = [9, 17] // Must be in order!!!
 
   currentRules: Map<number, PasswordLevelData> = new Map<number, PasswordLevelData>()
   currentRuleId = 0
   buttonText: string = this.SUBMIT_TEXT
   onSubmitCallback = this.checkAnswer
 
-  constructor(private snackBar: MatSnackBar, private passwordGameApiService: PasswordGameService, private downloadFileService: DownloadService) {}
+  @ViewChild(PasswordInputComponent) passwordInputComponent!: PasswordInputComponent;
+  firesStarted: number = 0
+
+  constructor(private snackBar: MatSnackBar, private passwordGameApiService: PasswordGameService, private downloadFileService: DownloadService) {
+  }
 
   /**
    * Checks the provided answer against the game's rules.
@@ -32,11 +37,18 @@ export class PasswordGameComponent {
   checkAnswer(answer: string) {
     console.log(answer)
     let levels = this.currentRules.size === 0 ? 1 : Array.from(this.currentRules.values()).filter(it => it.isCorrect).length + 1
-    this.passwordGameApiService.solve({ password: answer, levels: levels }).subscribe(
+    this.passwordGameApiService.solve({password: answer, levels: levels}).subscribe(
       (result) => {
         console.log(result)
         result.forEach((item, index) => {
           this.currentRules.set(index, new PasswordLevelData(item.description, item.isCorrect))
+
+          // Start fire on predefined levels
+          if (index === this.LEVELS_BEFORE_FIRE_INDEXES[this.firesStarted]) {
+            this.passwordInputComponent.burnPasswordAndIndicate()
+
+            this.firesStarted++;
+          }
         })
         this.currentRuleId = result.length
 

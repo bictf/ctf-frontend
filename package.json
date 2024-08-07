@@ -30,6 +30,7 @@
     "ng-openapi-gen": "^0.51.0",
     "ngx-cookie-service": "^17.0.1",
     "rxjs": "~7.8.1",
+    "sweetalert2": "^11.12.4",
     "tslib": "^2.6.2",
     "zone.js": "~0.14.3"
   },
@@ -44,8 +45,8 @@
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.3.3",
-    "ng": "^0.0.0"
+    "ng": "^0.0.0",
+    "typescript": "~5.3.3"
   },
   "browser": {
     "fs": false,
