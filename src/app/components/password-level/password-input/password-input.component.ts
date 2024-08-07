@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, input, Input, Output} from '@angular/core';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
@@ -22,6 +22,8 @@ import {MatOption, MatSelect} from "@angular/material/select";
   styleUrl: './password-input.component.scss',
 })
 export class PasswordInputComponent {
+  private readonly MAX_LINES = 4
+
   @Input() ruleId?: number
   @Input() rule?: string
   @Output() onSubmit: EventEmitter<string> = new EventEmitter<string>()
@@ -45,7 +47,15 @@ export class PasswordInputComponent {
   adjustHeight(inputTextEvent: Event) {
     const inputField = inputTextEvent.target as HTMLTextAreaElement;
 
+    const lineHeight = parseInt(window.getComputedStyle(inputField).lineHeight, 10);
+    console.log(lineHeight)
+    const maxHeight = lineHeight * this.MAX_LINES;
+
     inputField.style.height = 'auto';
-    inputField.style.height = inputField.scrollHeight + 'px';
+    if (inputField.scrollHeight <= maxHeight) {
+      inputField.style.height = inputField.scrollHeight + 'px';
+    } else {
+      inputField.style.height = maxHeight + 'px';
+    }
   }
 }
