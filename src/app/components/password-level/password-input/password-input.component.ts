@@ -41,4 +41,11 @@ export class PasswordInputComponent {
   checkAnswer() {
     this.onSubmit.emit(this.getPassword())
   }
+
+  adjustHeight(inputTextEvent: Event) {
+    const inputField = inputTextEvent.target as HTMLTextAreaElement;
+
+    inputField.style.height = 'auto';
+    inputField.style.height = inputField.scrollHeight + 'px';
+  }
 }
