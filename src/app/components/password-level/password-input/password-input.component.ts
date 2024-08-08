@@ -57,7 +57,9 @@ export class PasswordInputComponent {
     this.burnPassword()
 
     Swal.fire({
-      title: 'Who started the fire!?\n🔥🔥🔥',
+      title: 'Who started the fire!?\n🔥🔥🔥🔥🔥🔥',
+      color: "darkred",
+      background: "black",
       confirmButtonText: "We didn't start the fire!",
       icon: 'warning',
       iconHtml: '<img src="../../../../assets/elmo-burning.gif">',
