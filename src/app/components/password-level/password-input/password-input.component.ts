@@ -62,7 +62,7 @@ export class PasswordInputComponent {
       background: "black",
       confirmButtonText: "We didn't start the fire!",
       icon: 'warning',
-      iconHtml: '<img src="../../../../assets/elmo-burning.gif">',
+      iconHtml: '<img src="/assets/elmo-burning.gif">',
       customClass: {
         popup: 'burning-popup',
         title: 'burning-title',
