@@ -43,9 +43,6 @@ export class PasswordInputComponent {
   }
 
   private setPassword(newPassword: string) {
-    for (const char of newPassword) {
-
-    }
     this.passwordForm.get('password')?.setValue(newPassword)
   }
 
