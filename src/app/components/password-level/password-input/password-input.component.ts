@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Input, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
@@ -23,15 +23,15 @@ import Swal from "sweetalert2";
   styleUrl: './password-input.component.scss',
 })
 export class PasswordInputComponent {
-  private readonly MAX_LINES = 4
   FIRE_EMOJI = '🔥'
   FIRE_SPREAD_INTERVAL_IN_MS = 1000
-
   @Input() ruleId?: number
   @Input() rule?: string
   @Output() onSubmit: EventEmitter<string> = new EventEmitter<string>()
   public passwordForm: FormGroup
   @Input() buttonText!: string
+  @ViewChild("passwordArea") textarea!: ElementRef<HTMLInputElement>;
+  private readonly MAX_LINES = 4
 
   constructor(formBuilder: FormBuilder) {
     this.passwordForm = formBuilder.group({
@@ -43,14 +43,9 @@ export class PasswordInputComponent {
     return this.passwordForm.get('password')?.value as string
   }
 
-  private setPassword(newPassword: string) {
-    this.passwordForm.get('password')?.setValue(newPassword)
-  }
-
   checkAnswer() {
     this.onSubmit.emit(this.getPassword())
   }
-
 
   adjustHeight(inputTextEvent: Event) {
     const inputField = inputTextEvent.target as HTMLTextAreaElement;
@@ -75,13 +70,36 @@ export class PasswordInputComponent {
       background: "black",
       confirmButtonText: "We didn't start the fire!",
       icon: 'warning',
-      iconHtml: '<img src="/assets/elmo-burning.gif">',
+      iconHtml: '<img src="/assets/elmo-burning.gif" alt="elmo on fire">',
       customClass: {
         popup: 'burning-popup',
         title: 'burning-title',
         confirmButton: 'burning-confirm-button',
       }
     });
+  }
+
+  // Handle Enter key press to submit form
+  onEnter(event: Event): boolean {
+    event.preventDefault(); // Prevent default behavior (e.g., newline in textarea)
+    this.checkAnswer(); // Call the form submit function
+    return false;
+  }
+
+  onTab(event: Event): boolean {
+    event.preventDefault();
+    let textArea = this.textarea.nativeElement
+    textArea.setRangeText(
+      "\t",
+      textArea.selectionStart!,
+      textArea.selectionEnd!,
+      "end"
+    );
+    return false
+  }
+
+  private setPassword(newPassword: string) {
+    this.passwordForm.get('password')?.setValue(newPassword)
   }
 
   private burnPassword() {
@@ -127,12 +145,5 @@ export class PasswordInputComponent {
 
   private isOnFire(text: string): boolean {
     return text.includes(this.FIRE_EMOJI);
-  }
-
-  // Handle Enter key press to submit form
-  onEnter(event: Event): boolean {
-    event.preventDefault(); // Prevent default behavior (e.g., newline in textarea)
-    this.checkAnswer(); // Call the form submit function
-    return false;
   }
 }
