@@ -56,7 +56,6 @@ export class PasswordInputComponent {
     const inputField = inputTextEvent.target as HTMLTextAreaElement;
 
     const lineHeight = parseInt(window.getComputedStyle(inputField).lineHeight, 10);
-    console.log(lineHeight)
     const maxHeight = lineHeight * this.MAX_LINES;
 
     inputField.style.height = 'auto';
@@ -65,6 +64,7 @@ export class PasswordInputComponent {
     } else {
       inputField.style.height = maxHeight + 'px';
     }
+  }
 
   burnPasswordAndIndicate() {
     this.burnPassword()
@@ -127,5 +127,12 @@ export class PasswordInputComponent {
 
   private isOnFire(text: string): boolean {
     return text.includes(this.FIRE_EMOJI);
+  }
+
+  // Handle Enter key press to submit form
+  onEnter(event: Event): boolean {
+    event.preventDefault(); // Prevent default behavior (e.g., newline in textarea)
+    this.checkAnswer(); // Call the form submit function
+    return false;
   }
 }
