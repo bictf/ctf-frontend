@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { CaptchaHandlerService } from 'src/app/services/captcha-handler.service';
+import { Environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-captcha-button',
@@ -25,7 +26,7 @@ export class CaptchaButtonComponent {
   }
 
   raiseCaptcha() {
-    if (this.cookieService.get(this.pageName) == "false") {
+    if ((Environment.captchaPopUp) && (this.cookieService.get(this.pageName) == "false")) {
       this.captchaHandler.openCaptcha(() => {
         this.cookieService.set(this.pageName, "true")
         this.clickedEvent.emit()
