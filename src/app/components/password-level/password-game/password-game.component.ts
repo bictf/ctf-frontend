@@ -39,8 +39,7 @@ export class PasswordGameComponent {
     let levels = this.currentRules.size === 0 ? 1 : Array.from(this.currentRules.values()).filter(it => it.isCorrect).length + 1
     this.passwordGameApiService.solve({password: answer, levels: levels}).subscribe(
       (result) => {
-        console.log(result)
-        result.forEach((item, index) => {
+          result.forEach((item, index) => {
           this.currentRules.set(index, new PasswordLevelData(item.description, item.isCorrect))
 
           // Start fire on predefined levels
@@ -120,11 +119,18 @@ export class PasswordGameComponent {
         },
         async error => {
           this.snackBar.open(await (error.error as Blob).text(), '', {duration: 3000, panelClass: 'error-snack-bar'})
-
           this.buttonText = this.SUBMIT_TEXT
+
+          // PATCH - FIX THIS!!
+          let lastRule = Array.from(this.currentRules.keys()).pop();
+          if (lastRule != null) {
+            this.currentRules.delete(lastRule);
+          }
+
           this.onSubmitCallback = this.checkAnswer
           this.checkAnswer(password)
         })
 
   }
 }
+21

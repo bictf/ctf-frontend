@@ -1,15 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoginResponseFromServer } from 'src/app/objects/api/LoginResponseFromServer';
-import { WordleAnswerComponent } from '../wordle-answer/wordle-answer.component';
-import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { HttpClient } from '@angular/common/http';
-import { getUuid } from 'src/app/services/uuidService';
-import { TimerComponent } from '../timer/timer.component';
-import { LoginService } from "../../modules/openapi/services/login.service";
-import { CaptchaButtonComponent } from '../captcha-button/captcha-button.component';
-import { CaptchaHandlerService } from 'src/app/services/captcha-handler.service';
+import {Component, ViewChild} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {WordleAnswerComponent} from '../wordle-answer/wordle-answer.component';
+import {CookieService} from 'ngx-cookie-service';
+import {getUuid} from 'src/app/services/uuidService';
+import {TimerComponent} from '../timer/timer.component';
+import {LoginService} from "../../modules/openapi/services/login.service";
+import {LoginResponseToUser} from "../../modules/openapi/models/login-response-to-user";
+import {LoginCtfStage} from "../../modules/openapi/models/login-ctf-stage";
+import {StageNavigatorService} from "../../services/stage-navigator.service";
+import {WordleCharState} from "../../modules/openapi/models/wordle-char-state";
+import {CtfStage} from "../../modules/openapi/models";
 
 @Component({
   selector: 'app-login-form',
@@ -26,17 +26,12 @@ export class LoginFormComponent {
     private cookieService: CookieService,
     private loginService: LoginService,
     private snackBar: MatSnackBar,
-    private router: Router,
-    private captchaHandler: CaptchaHandlerService) {
+    private stageNavigator: StageNavigatorService,) {
     this.cookieService.delete('user');
   }
 
   setCookie(cookie: string) {
     this.cookieService.set('user', cookie);
-  }
-
-  ngOnInit() {
-    this.cookieService.set("captcha", "false")
   }
 
   login() {
@@ -64,23 +59,43 @@ export class LoginFormComponent {
   }
 
   handleUserLogin({
-    success,
-    passwordDiff,
-    cookie,
-    time,
-  }: LoginResponseFromServer) {
+                    cookie,
+                    loginType,
+                    passwordData,
+                    success,
+                  }: LoginResponseToUser) {
     if (success) {
       this.setCookie(cookie);
-      this.router.navigate(['/gooloog']);
+      this.stageNavigator.routeToNextStage(getUuid());
     } else {
-      this.snackBar.openFromComponent(WordleAnswerComponent, {
-        data: passwordDiff,
-        duration: 5000,
-      });
+      this.userLoginStage(loginType, passwordData);
+    }
+  }
 
-      if (!this.timer.timerStarted) {
-        this.timer.startTimer(time);
-      }
+  //TODO - make this more solid, maybe make a service. Leaving it like this because of time
+  userLoginStage(loginType: LoginCtfStage, passwordData: any) {
+    console.log(passwordData);
+    switch (loginType) {
+      case CtfStage.LoginWordle:
+        this.wordleLogin(passwordData.wordleDiff, passwordData.time);
+        break;
+
+      default:
+        this.snackBar.open("All them zionists tryna cyber me...", '', {
+          duration: 3000,
+          panelClass: 'error-snack-bar',
+        })
+    }
+  }
+
+  wordleLogin(passwordDiff: Array<WordleCharState>, time: number) {
+    this.snackBar.openFromComponent(WordleAnswerComponent, {
+      data: passwordDiff,
+      duration: 5000,
+    });
+
+    if (!this.timer.timerStarted) {
+      this.timer.startTimer(time);
     }
   }
 
@@ -88,10 +103,11 @@ export class LoginFormComponent {
     this.snackBar.open(
       'Who the hell is trying to login with Google in an isolated network?!🤦‍♂️',
       '',
-      { duration: 3000 }
+      {duration: 3000}
     );
   }
-  onKeyUp(){
+
+  onKeyUp() {
     (document.getElementById("loginButton")?.children[0] as HTMLElement)?.click()
   }
 }
