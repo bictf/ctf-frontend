@@ -1,0 +1,12 @@
+<div class="signal-chart-container">
+  <app-signal-graph *ngFor="let signalGraph of graphData.signalChart; let graphIndex = index"
+                    [graphData]="signalGraph" [animationTailLengthMultiplier]="5" [animationSpeed]="1"
+                    [animationPhase]="graphIndex * 2"></app-signal-graph>
+
+  <div class="password-row">
+    <div class="password-part" *ngFor="let passwordPart of graphData.passwordParts">
+      {{ passwordPart }}
+    </div>
+  </div>
+</div>
+

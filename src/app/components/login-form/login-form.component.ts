@@ -5,11 +5,11 @@ import {CookieService} from 'ngx-cookie-service';
 import {getUuid} from 'src/app/services/uuidService';
 import {TimerComponent} from '../timer/timer.component';
 import {LoginService} from "../../modules/openapi/services/login.service";
+import {StageNavigatorService} from "../../services/stage-navigator.service";
 import {LoginResponseToUser} from "../../modules/openapi/models/login-response-to-user";
 import {LoginCtfStage} from "../../modules/openapi/models/login-ctf-stage";
-import {StageNavigatorService} from "../../services/stage-navigator.service";
-import {WordleCharState} from "../../modules/openapi/models/wordle-char-state";
-import {CtfStage} from "../../modules/openapi/models";
+import {CtfStage, SignalGraph, WordleCharState} from "../../modules/openapi/models";
+import {SignalChartComponent} from "../signal-chart/signal-chart.component";
 
 @Component({
   selector: 'app-login-form',
@@ -74,10 +74,13 @@ export class LoginFormComponent {
 
   //TODO - make this more solid, maybe make a service. Leaving it like this because of time
   userLoginStage(loginType: LoginCtfStage, passwordData: any) {
-    console.log(passwordData);
     switch (loginType) {
       case CtfStage.LoginWordle:
         this.wordleLogin(passwordData.wordleDiff, passwordData.time);
+        break;
+
+      case CtfStage.LoginSignalChart:
+        this.signalChartLogin(passwordData.signalGraphs, passwordData.passwordParts);
         break;
 
       default:
@@ -88,7 +91,7 @@ export class LoginFormComponent {
     }
   }
 
-  wordleLogin(passwordDiff: Array<WordleCharState>, time: number) {
+  private wordleLogin(passwordDiff: Array<WordleCharState>, time: number) {
     this.snackBar.openFromComponent(WordleAnswerComponent, {
       data: passwordDiff,
       duration: 5000,
@@ -97,6 +100,16 @@ export class LoginFormComponent {
     if (!this.timer.timerStarted) {
       this.timer.startTimer(time);
     }
+  }
+
+  private signalChartLogin(signalGraphs: SignalGraph[], passwordParts: String[]) {
+    this.snackBar.openFromComponent(SignalChartComponent, {
+      data: {
+        signalChart: signalGraphs,
+        passwordParts: passwordParts
+      },
+      duration: 100000,
+    });
   }
 
   loginWithGoogle() {
