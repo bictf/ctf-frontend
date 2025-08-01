@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AccessDeniedService} from "../../modules/openapi/services/access-denied.service"
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-access-denied-screen',
@@ -18,24 +19,23 @@ export class AccessDeniedScreenComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.accessDeniedService.accessDeniedMessageGet().subscribe(
+    this.accessDeniedService.accessDeniedMessageGet().pipe(
+      finalize(() => {
+        this.openSnackBar(this.message);
+      })
+    ).subscribe(
       (result) => {
         this.message = result;
-        this.snackBar.open(this.message, '', {
-          duration: 3000,
-          panelClass: 'error-snack-bar',
-        })
       }, (error) => {
         this.message = error.message;
-        this.snackBar.open(this.message, '', {
-          duration: 3000,
-          panelClass: 'error-snack-bar',
-        })
       }
     )
-
-
-
   }
 
+  private openSnackBar(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 3000,
+      panelClass: 'error-snack-bar',
+    })
+  }
 }
