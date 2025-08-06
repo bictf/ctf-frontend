@@ -88,10 +88,6 @@ export class DataScreenComponent {
       (result) => (result ? this.stageNavigator.routeToNextStage(getUuid()) : this.router.navigateByUrl("access-denied")),
       (_) => {
         this.router.navigate(['/access-denied'])
-        this.snackBar.open("Only admin users can download secret files!", '', {
-          duration: 3000,
-          panelClass: 'error-snack-bar',
-        })
       }
     )
 
