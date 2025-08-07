@@ -1,0 +1,4 @@
+<app-logic-gate *ngFor="let logicGate of chart.gates"
+                [lookUpTable]="logicGate.lookUpTable"
+                [displayText]="logicGate.displayText"
+                [inputSignals]="[LogicSignal.RED, LogicSignal.GREEN]"></app-logic-gate>

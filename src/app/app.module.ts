@@ -33,8 +33,12 @@ import {
 import {CaptchaButtonComponent} from './components/captcha-button/captcha-button.component';
 import {CaptchaHandlerService} from './services/captcha-handler.service';
 import {PasswordGameScreenComponent} from './screens/password-game-screen/password-game-screen.component';
+import {LogicGateComponent} from "./components/logic-gate/logic-gate.component";
+import { LogicSignalConnectionLineComponent } from './components/logic-signal-connection-line/logic-signal-connection-line.component';
 import {SignalChartComponent} from "./components/signal-chart/signal-chart.component";
 import {SignalGraphComponent} from "./components/signal-chart/signal-graph/signal-graph.component";
+import { LogicChartComponent } from './components/logic-chart/logic-chart.component';
+import { LogicGatesScreenComponent } from './screens/logic-gates-screen/logic-gates-screen.component';
 
 const appRoutes: Routes = [
   {path: 'gooloog', component: DataScreenComponent},
@@ -65,8 +69,12 @@ const appRoutes: Routes = [
     CaptchaBackendHandlerComponent,
     StartCaptchasButtonComponent,
     StartCaptchasDialogComponent,
+    LogicGateComponent,
+    LogicSignalConnectionLineComponent,
     SignalChartComponent,
-    SignalGraphComponent
+    SignalGraphComponent,
+    LogicChartComponent,
+    LogicGatesScreenComponent
   ],
   providers: [
     CaptchaHandlerService,
@@ -74,6 +82,9 @@ const appRoutes: Routes = [
     MatDialog
   ],
   bootstrap: [AppComponent],
+  exports: [
+    LogicChartComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

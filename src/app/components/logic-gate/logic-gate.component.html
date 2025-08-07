@@ -1,0 +1,13 @@
+<div class="logic-gate-container">
+  <div
+    class="knob input-knob"
+    *ngFor="let signal of inputSignals; let i = index"
+    [style.top.%]="getKnobPosition(i, inputSignals.length)"
+  ></div>
+
+  <div class="logic-gate">
+    {{ displayText }}
+  </div>
+
+  <div class="knob output-knob"></div>
+</div>
