@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {LogicChart} from "../../objects/deletethis/logic-chart-types";
 import {LogicSignal} from "../../objects/deletethis/logicSignal";
 
