@@ -40,6 +40,7 @@ import {SignalGraphComponent} from "./components/signal-chart/signal-graph/signa
 import { LogicChartComponent } from './components/logic-chart/logic-chart.component';
 import { LogicGatesScreenComponent } from './screens/logic-gates-screen/logic-gates-screen.component';
 import {CookieSkipPageComponent} from "./components/cookie-skip-page/cookie-skip-page.component";
+import {DuduImagesComponent} from "./components/dudu-images/dudu-images.component";
 
 const appRoutes: Routes = [
   {path: 'gooloog', component: DataScreenComponent},
@@ -76,7 +77,8 @@ const appRoutes: Routes = [
     SignalChartComponent,
     SignalGraphComponent,
     LogicChartComponent,
-    LogicGatesScreenComponent
+    LogicGatesScreenComponent,
+    DuduImagesComponent
   ],
   providers: [
     CaptchaHandlerService,

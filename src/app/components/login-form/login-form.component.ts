@@ -10,6 +10,7 @@ import {LoginResponseToUser} from "../../modules/openapi/models/login-response-t
 import {LoginCtfStage} from "../../modules/openapi/models/login-ctf-stage";
 import {CtfStage, SignalGraph, WordleCharState} from "../../modules/openapi/models";
 import {SignalChartComponent} from "../signal-chart/signal-chart.component";
+import {DuduImagesComponent} from "../dudu-images/dudu-images.component";
 
 @Component({
   selector: 'app-login-form',
@@ -83,6 +84,10 @@ export class LoginFormComponent {
         this.signalChartLogin(passwordData.signalGraphs, passwordData.passwordParts);
         break;
 
+      case CtfStage.LoginDockerImages:
+        this.dockerImagesLogin();
+        break;
+
       default:
         this.snackBar.open("All them zionists tryna cyber me...", '', {
           duration: 3000,
@@ -110,6 +115,15 @@ export class LoginFormComponent {
       },
       duration: 100000,
     });
+  }
+
+  private dockerImagesLogin() {
+    this.snackBar.openFromComponent(DuduImagesComponent, {
+      data: {
+        count: 6
+      },
+      duration: 5000
+    })
   }
 
   loginWithGoogle() {

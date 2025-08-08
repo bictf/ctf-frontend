@@ -1,0 +1,12 @@
+.image-container {
+  display: flex;
+  flex-wrap: wrap;       /* allow wrapping to fill lines */
+  justify-content: center; /* center horizontally */
+  width: 100%;           /* take full snackbar width */
+}
+
+.image {
+  flex: 1 1 auto;        /* make each image grow/shrink */
+  max-width: 50px;       /* optional: prevent huge images */
+  height: auto;          /* keep aspect ratio */
+}
