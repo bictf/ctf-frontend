@@ -39,6 +39,7 @@ import {SignalChartComponent} from "./components/signal-chart/signal-chart.compo
 import {SignalGraphComponent} from "./components/signal-chart/signal-graph/signal-graph.component";
 import { LogicChartComponent } from './components/logic-chart/logic-chart.component';
 import { LogicGatesScreenComponent } from './screens/logic-gates-screen/logic-gates-screen.component';
+import {CookieSkipPageComponent} from "./components/cookie-skip-page/cookie-skip-page.component";
 
 const appRoutes: Routes = [
   {path: 'gooloog', component: DataScreenComponent},
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     component: PasswordGameScreenComponent
   },
   {path: 'access-denied', component: AccessDeniedScreenComponent},
+  {path: 'please_get_me_admin', component: CookieSkipPageComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 ];
 
