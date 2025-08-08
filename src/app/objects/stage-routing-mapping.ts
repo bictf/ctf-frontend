@@ -5,5 +5,6 @@ export const StageRoutingMap: Record<CtfStage, String> = {
     [CtfStage.PasswordGame]: '/admin-password-recovery',
     [CtfStage.LoginWordle]: '/login',
     [CtfStage.LoginSignalChart]: '/login',
+    [CtfStage.LoginDockerImages]: '/login.dockerimages',
     [CtfStage.EndOfCtf]: ''
 }
