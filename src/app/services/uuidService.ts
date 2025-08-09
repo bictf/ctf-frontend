@@ -6,19 +6,12 @@ function generateUuid(): string {
   });
 }
 
-export function initUuid(){
-    const currentUuid = getUuid()
+export function getUuid(){
+    const currentUuid = sessionStorage.getItem("uuid")
 
-    if (getUuid() != "")
-    {
-        return currentUuid
-    }
+    if (currentUuid) return currentUuid;
 
     const newUuid = generateUuid()
-    localStorage.setItem("uuid", newUuid)
+    sessionStorage.setItem("uuid", newUuid)
     return newUuid
-}
-
-export function getUuid(){
-    return localStorage.getItem("uuid") || ""
 }

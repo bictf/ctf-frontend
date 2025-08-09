@@ -1,6 +1,6 @@
 <div class="signal-chart-container">
   <app-signal-graph *ngFor="let signalGraph of graphData.signalChart; let graphIndex = index"
-                    [graphData]="signalGraph" [animationTailLengthMultiplier]="5" [animationSpeed]="1"
+                    [graphData]="signalGraph" [animationTailLengthMultiplier]="15" [animationSpeed]="1"
                     [animationPhase]="graphIndex * 2"></app-signal-graph>
 
   <div class="password-row">

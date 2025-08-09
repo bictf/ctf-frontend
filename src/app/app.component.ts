@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { initUuid } from './services/uuidService';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +7,4 @@ import { initUuid } from './services/uuidService';
 })
 export class AppComponent {
   title = 'biss-ctf';
-
-  ngOnInit() {
-    initUuid();
-  }
 }
