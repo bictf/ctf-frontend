@@ -30,8 +30,8 @@ export class SignalGraphComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly graphWidth = 1000;
   readonly graphHeight = 100;
 
-  private readonly highSignalY = this.graphHeight * 0.8;
-  private readonly lowSignalY = this.graphHeight * 0.2;
+  private readonly highSignalY = this.graphHeight * 0.2;
+  private readonly lowSignalY = this.graphHeight * 0.8;
 
   ngOnInit() {
     if (this.graphData) {
@@ -111,13 +111,6 @@ export class SignalGraphComponent implements OnInit, AfterViewInit, OnDestroy {
     let previousSignal = this.graphData[0];
 
     this.graphData.forEach((signal, signalIndex) => {
-      const horizontalSegment = new SignalSvgSegment(currentPoint.x, currentPoint.y, currentPoint.x + this.signalWidth, currentPoint.y);
-      this.signalSegments.push(horizontalSegment);
-
-      currentPoint.x = horizontalSegment.toX;
-
-      if (signalIndex >= this.signalCount - 1) return;
-
       if (signal !== previousSignal) {
         const verticalSegment = new SignalSvgSegment(
           currentPoint.x,
@@ -129,6 +122,9 @@ export class SignalGraphComponent implements OnInit, AfterViewInit, OnDestroy {
         this.signalSegments.push(verticalSegment);
         currentPoint.y = verticalSegment.toY;
       }
+      const horizontalSegment = new SignalSvgSegment(currentPoint.x, currentPoint.y, currentPoint.x + this.signalWidth, currentPoint.y);
+      this.signalSegments.push(horizontalSegment);
+      currentPoint.x = horizontalSegment.toX;
 
       previousSignal = signal;
     });
